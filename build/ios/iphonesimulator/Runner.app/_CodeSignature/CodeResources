@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		5tdb3jyOLV+b9fD+WVLVGL/9LxA=
+		rzKiSm46BsyW+Ub+7AFDRIUnYUw=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		kTFei/v8vfszMtFj8pz5dZJKTew=
+		WnHiVwykjFXMsuvbiBl30Q4Zg0E=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		j1VFNHLPnl+fmJonWPjX25mRURE=
+		Sn9llSy+lPN19gYgkoiBIA9ammA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		N22SxRgkm7x+fBI72R1dCvnZ3Ao=
+		KtZlztVfYbE46ZTYnQDuLRe9ayo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -184,6 +184,26 @@
 		<data>
 		Ubat0LvE4LUgCwHeyl0Anx2vnzk=
 		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
+		<data>
+		7j0oBvjCAmi1yIagyHOUfjZvfos=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		XjZZP3jYKDSnFO6h2uZDWmixEmY=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
+		<data>
+		2Z7RhG8vOIKV10ty/oWg1SyQ5QE=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation_privacy.bundle/Info.plist</key>
+		<data>
+		KCgsPfjSd8Qnw+yj9uHRcdm9bGo=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		6uLTlq7fgHHWA8emYDf4ImHC+AY=
+		</data>
 		<key>Info.plist</key>
 		<data>
 		SYM/ri2DmEJ20Qo3OgT8/0kF61w=
@@ -269,7 +289,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MyrlVDVChLamYgt+OXHGqWzGCcnTVTPkvBXdgHhBhg4=
+			1Ol49mQ24rZTI8Jd2XQd1Ne79xfe69tmixAK6uQEzGU=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -283,7 +303,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			K1oqTdm0zB9CHMng/azWW9lr682GmRLdOg9g35rc590=
+			ZEw/YPJRSZHVXKV8zPInIaE8LMp1l8zBw1yDViZddDY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -311,7 +331,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nkd8HZslv4fZ8N5h6WxnLXp9wih9yPukb8ooxHpMoqY=
+			oo4bDNtOKArM+vQT9pF+topCqnRQCcdsdv3ci8gQ6Q0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -332,7 +352,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Q4ExkUqgCm57DWZf1x6RZs0oOe+4TqkdI482+QG+IsI=
+			1jlZWymVmH2Ntv0wu2XR7VYtJmVnwemF1nlwt2n+fd8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -508,6 +528,41 @@
 			<key>hash2</key>
 			<data>
 			ZepykIMSjfzhwAcmupMrkaqvXkhza1ZE3TdHjl8odaw=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PBtyg3eYI1AC1O0MCXbdbLm+3MU11axQYVzK2tQtm8k=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Dk/OW6f3glvt5B6QfKZc1Rq/3Fx30PgCi0IiAAnDELs=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Y4Vq34OmPwJp+vTFNa3KJVTQn3KNX3SLH5b0eeDwnzE=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1JksGWPSFnoeWv0reeLJRP5AlLrvYVWtOFb5XAQ0tIQ=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BWQouTi9VwGKYAGdFcPB7i+nJ/I2h1mLu9k0hIsYCxo=
 			</data>
 		</dict>
 	</dict>

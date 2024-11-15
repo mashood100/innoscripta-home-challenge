@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xymbia_app/presentation/theme/color_schemes.dart';
+import 'package:innoscripta_home_challenge/presentation/theme/color_schemes.dart';
 
 const fontFamily = 'Roboto';
 
