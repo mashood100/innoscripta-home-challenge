@@ -44,6 +44,7 @@ class TasksApiService extends ApiService {
         payload: task.toMap(),
       );
       final response = await makeRequest(requestData);
+
       return response.body;
     } catch (e) {
       rethrow;

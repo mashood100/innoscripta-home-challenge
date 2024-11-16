@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TaskCard extends StatelessWidget {
+class TaskCard extends ConsumerWidget {
   final Task task;
 
   const TaskCard({
@@ -13,7 +16,7 @@ class TaskCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LongPressDraggable<Task>(
       data: task,
       feedback: Material(
@@ -87,6 +90,47 @@ class TaskCard extends StatelessWidget {
           if (task.due != null) ...[
             Space.y1,
             _buildDueDate(context),
+          ],
+          if (task.labels!.contains('in_progress')) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Consumer(
+                  builder: (context, ref, _) {
+                    // final timerState = ref.watch(timerProvider);
+                    // final isRunning = timerState.runningTaskId == task.id;
+
+                    return Row(
+                      children: [
+                        TimerButton(
+                          task: task,
+                        )
+                        // IconButton(
+                        //   icon:
+                        //       Icon(isRunning ? Icons.pause : Icons.play_arrow),
+                        //   onPressed: () {
+                        //     final notifier = ref.read(timerProvider.notifier);
+                        //     if (isRunning) {
+                        //       notifier.stopTimer();
+                        //     } else {
+                        //       notifier.startTimer(task);
+                        //     }
+                        //   },
+                        // ),
+                        // Text(
+                        //   ref.read(timerProvider.notifier).getFormattedDuration(
+                        //         isRunning
+                        //             ? timerState.currentDuration
+                        //             : (task.duration ?? 0),
+                        //       ),
+                        // ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
+            Space.y1,
           ],
         ],
       ),

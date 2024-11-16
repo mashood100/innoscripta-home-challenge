@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_slidable: ^3.0.1
   modal_bottom_sheet: ^3.0.0-pre
-  
+
   # Utils
   flutter_screenutil: ^5.9.0
   equatable: ^2.0.5
@@ -35,13 +35,15 @@ dependencies:
   flutter_riverpod: ^2.5.1
 
   # local storage
-  shared_preferences: ^2.2.2
 
   # Network
   http: ^1.2.2
 
   # Routing
   go_router: ^14.6.0
+
+  # Local Storage
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:

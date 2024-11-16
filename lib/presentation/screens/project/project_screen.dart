@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/presentation/provider/project/project_state.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/bottom_sheet/add_project_bottom_sheet.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/presentation_provider.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_list.dart';
 

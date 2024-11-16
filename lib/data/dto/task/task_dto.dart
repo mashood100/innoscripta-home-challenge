@@ -36,6 +36,30 @@ class Due {
   }
 }
 
+class TaskDuration {
+  final int amount;
+  final String unit;
+
+  TaskDuration({
+    required this.amount,
+    required this.unit,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'amount': amount,
+      'unit': unit,
+    };
+  }
+
+  factory TaskDuration.fromMap(Map<String, dynamic> map) {
+    return TaskDuration(
+      amount: map['amount'] as int,
+      unit: map['unit'] as String,
+    );
+  }
+}
+
 class TaskDto {
   String? id;
   String? content;
@@ -54,6 +78,7 @@ class TaskDto {
   String? assigneeId;
   String? assignerId;
   String? url;
+  final TaskDuration? duration;
 
   TaskDto({
     this.id,
@@ -73,6 +98,7 @@ class TaskDto {
     this.assigneeId,
     this.assignerId,
     this.url,
+    this.duration,
   });
 
   TaskDto copyWith({
@@ -93,6 +119,7 @@ class TaskDto {
     String? assigneeId,
     String? assignerId,
     String? url,
+    TaskDuration? duration,
   }) {
     return TaskDto(
       id: id ?? this.id,
@@ -112,6 +139,7 @@ class TaskDto {
       assigneeId: assigneeId ?? this.assigneeId,
       assignerId: assignerId ?? this.assignerId,
       url: url ?? this.url,
+      duration: duration ?? this.duration,
     );
   }
 
@@ -134,6 +162,7 @@ class TaskDto {
       'assignee_id': assigneeId,
       'assigner_id': assignerId,
       'url': url,
+      'duration': duration?.toMap(),
     };
   }
 
@@ -157,6 +186,7 @@ class TaskDto {
       assigneeId: map['assignee_id']?.toString(),
       assignerId: map['assigner_id']?.toString(),
       url: map['url'],
+      duration: map['duration'] != null ? TaskDuration.fromMap(map['duration']) : null,
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/bottom_sheet/add_project_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/presentation_provider.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 
 class ProjectList extends ConsumerWidget {
   final List<Project> projects;

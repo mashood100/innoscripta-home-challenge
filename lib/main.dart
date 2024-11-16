@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_router.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/theme_provider.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/core_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+late final SharedPreferences localStorage;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  localStorage = await SharedPreferences.getInstance();
   runApp(const ProviderScope(child: MyApp()));
 }
 

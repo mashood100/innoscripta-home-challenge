@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_row.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/presentation_provider.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -41,7 +41,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     final taskState = ref.watch(taskStateProvider);
     App.init(context);
     ScreenUtil.init(context, designSize: const Size(390, 848));
-    // Filter tasks by labels
     final todoTasks =
         taskState.tasks.where((task) => task.labels!.contains('todo')).toList();
     final inProgressTasks = taskState.tasks
@@ -50,7 +49,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     final completedTasks = taskState.tasks
         .where((task) => task.labels!.contains('completed'))
         .toList();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tasks'),

@@ -2,6 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 
 class Task extends TaskDto with EquatableMixin {
+  @override
+  final TaskDuration? duration;
+
   Task({
     String? id,
     String? content,
@@ -20,7 +23,11 @@ class Task extends TaskDto with EquatableMixin {
     String? assigneeId,
     String? assignerId,
     String? url,
-  }) : super(
+    int? durationInMinutes,
+  })  : duration = durationInMinutes != null
+            ? TaskDuration(amount: durationInMinutes, unit: 'minute')
+            : null,
+        super(
           id: id,
           content: content,
           description: description,
@@ -38,8 +45,14 @@ class Task extends TaskDto with EquatableMixin {
           assigneeId: assigneeId,
           assignerId: assignerId,
           url: url,
+          duration: durationInMinutes != null
+              ? TaskDuration(amount: durationInMinutes, unit: 'minute')
+              : null,
         );
 
+  int? get durationInMinutes => duration?.amount;
+
+  @override
   Task copyWith({
     String? id,
     String? content,
@@ -58,6 +71,7 @@ class Task extends TaskDto with EquatableMixin {
     String? assigneeId,
     String? assignerId,
     String? url,
+    TaskDuration? duration,
   }) {
     return Task(
       id: id ?? this.id,
@@ -80,6 +94,7 @@ class Task extends TaskDto with EquatableMixin {
     );
   }
 
+  @override
   TaskDto toDto() {
     return TaskDto(
       id: id,
@@ -99,6 +114,9 @@ class Task extends TaskDto with EquatableMixin {
       assigneeId: assigneeId,
       assignerId: assignerId,
       url: url,
+      duration: durationInMinutes != null
+          ? TaskDuration(amount: durationInMinutes ?? 0, unit: 'minute')
+          : null,
     );
   }
 
@@ -121,6 +139,7 @@ class Task extends TaskDto with EquatableMixin {
       assigneeId: dto.assigneeId,
       assignerId: dto.assignerId,
       url: dto.url,
+      durationInMinutes: dto.duration?.amount,
     );
   }
 
@@ -143,5 +162,6 @@ class Task extends TaskDto with EquatableMixin {
         assigneeId,
         assignerId,
         url,
+        durationInMinutes,
       ];
 }

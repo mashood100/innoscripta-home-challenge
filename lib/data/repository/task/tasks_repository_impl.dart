@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:developer';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 import 'package:innoscripta_home_challenge/data/source/network/task/tasks_api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
@@ -72,6 +73,7 @@ class TasksRepositoryImpl implements TasksRepository {
       var allTasks = responseBody
           .map((taskMap) => Task.fromDto(TaskDto.fromMap(taskMap)))
           .toList();
+      log("responseBody $allTasks");
       return allTasks;
     } catch (e) {
       rethrow;
