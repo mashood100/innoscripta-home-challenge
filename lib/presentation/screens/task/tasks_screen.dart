@@ -28,6 +28,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   Future<void> _loadTasks() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final taskStateNotifier = ref.read(taskStateProvider.notifier);
+      taskStateNotifier.clearTasks();
       await taskStateNotifier.getAllTasks(widget.projectID);
     });
   }

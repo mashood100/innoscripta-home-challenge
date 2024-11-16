@@ -160,4 +160,8 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       SnackbarHelper.snackbarWithTextOnly('Failed to update task duration');
     }
   }
+
+  void clearTasks() {
+    state = state.copyWith(tasks: []);
+  }
 }
