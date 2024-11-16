@@ -1,0 +1,20 @@
+{
+    "projects": "Projects",
+    "menu": "Menu",
+    "languages": "Languages",
+    "settings": "Settings",
+    "createNewProject": "Create New Project",
+    "editProject": "Edit Project",
+    "addNewProject": "Add New Project",
+    "projectTitle": "Project Title",
+    "projectColor": "Project Color",
+    "pleaseEnterTitle": "Please enter a title",
+    "updateProject": "Update Project",
+    "createProject": "Create Project",
+    "deleteProject": "Delete Project",
+    "deleteProjectConfirm": "Are you sure you want to delete this project?",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "untitledProject": "Untitled Project",
+    "comments": "{count} comments"
+}

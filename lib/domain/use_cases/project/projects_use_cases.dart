@@ -16,18 +16,17 @@ class ProjectsUseCases {
     }
   }
 
-  Future<List<Project>> update(
-      List<String?> ids, Map<String, dynamic> payload) async {
+  Future<Project> update(Project project) async {
     try {
-      return await _repository.update(ids, payload);
+      return await _repository.update(project);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> delete(List<String?> ids) async {
+  Future<void> delete(String? id) async {
     try {
-      return await _repository.delete(ids);
+      return await _repository.delete(id);
     } catch (e) {
       rethrow;
     }

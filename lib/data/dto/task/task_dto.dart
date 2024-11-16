@@ -1,5 +1,41 @@
 import 'dart:convert';
 
+class Due {
+  final String? date;
+  final String? string;
+  final String? lang;
+  final bool? isRecurring;
+  final String? datetime;
+
+  Due({
+    this.date,
+    this.string,
+    this.lang,
+    this.isRecurring,
+    this.datetime,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'date': date,
+      'string': string,
+      'lang': lang,
+      'is_recurring': isRecurring,
+      'datetime': datetime,
+    };
+  }
+
+  factory Due.fromMap(Map<String, dynamic> map) {
+    return Due(
+      date: map['date'],
+      string: map['string'],
+      lang: map['lang'],
+      isRecurring: map['is_recurring'],
+      datetime: map['datetime'],
+    );
+  }
+}
+
 class TaskDto {
   String? id;
   String? content;
@@ -10,7 +46,7 @@ class TaskDto {
   int? priority;
   String? projectId;
   List<String>? labels;
-  DateTime? due;
+  Due? due;
   String? sectionId;
   String? parentId;
   String? creatorId;
@@ -49,7 +85,7 @@ class TaskDto {
     int? priority,
     String? projectId,
     List<String>? labels,
-    DateTime? due,
+    Due? due,
     String? sectionId,
     String? parentId,
     String? creatorId,
@@ -90,7 +126,7 @@ class TaskDto {
       'priority': priority,
       'project_id': projectId,
       'labels': labels,
-      'due': due?.toIso8601String(),
+      'due': due?.toMap(),
       'section_id': sectionId,
       'parent_id': parentId,
       'creator_id': creatorId,
@@ -112,13 +148,12 @@ class TaskDto {
       priority: map['priority'],
       projectId: map['project_id']?.toString(),
       labels: List<String>.from(map['labels'] ?? []),
-      due: map['due'] != null ? DateTime.parse(map['due']) : null,
+      due: map['due'] != null ? Due.fromMap(map['due']) : null,
       sectionId: map['section_id']?.toString(),
       parentId: map['parent_id']?.toString(),
       creatorId: map['creator_id']?.toString(),
-      createdAt: map['created_at'] != null 
-          ? DateTime.parse(map['created_at']) 
-          : null,
+      createdAt:
+          map['created_at'] != null ? DateTime.parse(map['created_at']) : null,
       assigneeId: map['assignee_id']?.toString(),
       assignerId: map['assigner_id']?.toString(),
       url: map['url'],
@@ -127,6 +162,6 @@ class TaskDto {
 
   String toJson() => json.encode(toMap());
 
-  factory TaskDto.fromJson(String source) => 
+  factory TaskDto.fromJson(String source) =>
       TaskDto.fromMap(json.decode(source));
-} 
+}

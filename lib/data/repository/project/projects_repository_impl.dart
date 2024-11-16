@@ -29,29 +29,22 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
   }
 
   @override
-  Future<List<Project>> update(
-    List<String?> ids,
-    Map<String, dynamic> payload,
-  ) async {
+  Future<Project> update(Project project) async {
     try {
-      String projectIdsString = ids.join(',');
+      final responseString = await _api.update(project);
+      final Map<String, dynamic> responseBody =
+          convert.jsonDecode(responseString);
 
-      final responseString = await _api.update(projectIdsString, payload);
-      final List<dynamic> responseBody = convert.jsonDecode(responseString);
-
-      return responseBody
-          .map((projectMap) => Project.fromDto(ProjectDto.fromMap(projectMap)))
-          .toList();
+      return Project.fromDto(ProjectDto.fromMap(responseBody));
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<void> delete(List<String?> ids) async {
+  Future<void> delete(String? id) async {
     try {
-      String projectIdsString = ids.join(',');
-      await _api.delete(projectIdsString);
+      await _api.delete(id ?? "");
     } catch (e) {
       rethrow;
     }
@@ -78,8 +71,6 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
 
       return responseBody
           .map((projectMap) => Project.fromDto(ProjectDto.fromMap(projectMap)))
-          .where((project) =>
-              !(project.name == 'Inbox' && project.id == '2338232324'))
           .toList();
     } catch (e) {
       rethrow;
