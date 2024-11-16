@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -97,33 +96,11 @@ class TaskCard extends ConsumerWidget {
               children: [
                 Consumer(
                   builder: (context, ref, _) {
-                    // final timerState = ref.watch(timerProvider);
-                    // final isRunning = timerState.runningTaskId == task.id;
-
                     return Row(
                       children: [
                         TimerButton(
                           task: task,
                         )
-                        // IconButton(
-                        //   icon:
-                        //       Icon(isRunning ? Icons.pause : Icons.play_arrow),
-                        //   onPressed: () {
-                        //     final notifier = ref.read(timerProvider.notifier);
-                        //     if (isRunning) {
-                        //       notifier.stopTimer();
-                        //     } else {
-                        //       notifier.startTimer(task);
-                        //     }
-                        //   },
-                        // ),
-                        // Text(
-                        //   ref.read(timerProvider.notifier).getFormattedDuration(
-                        //         isRunning
-                        //             ? timerState.currentDuration
-                        //             : (task.duration ?? 0),
-                        //       ),
-                        // ),
                       ],
                     );
                   },

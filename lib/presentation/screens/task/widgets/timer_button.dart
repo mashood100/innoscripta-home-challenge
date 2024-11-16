@@ -29,22 +29,50 @@ class TimerButton extends ConsumerWidget {
             if (isRunning) {
               notifier.pauseTimer(task.id!);
             } else {
-              notifier.startTimer(
-                task,
-              );
+              notifier.startTimer(task);
             }
           },
         ),
         Text(
           formatDuration(currentDuration),
         ),
+        IconButton(
+          icon: const Icon(Icons.restart_alt),
+          onPressed: () => _showResetConfirmation(context, ref),
+        ),
       ],
     );
   }
 
+  Future<void> _showResetConfirmation(BuildContext context, WidgetRef ref) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Reset Timer'),
+          content: const Text('Are you sure you want to reset the timer? You will lose your progress.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                ref.read(timerProvider.notifier).resetTimer(task.id!);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Reset'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   String formatDuration(int seconds) {
-    final minutes = (seconds / 60).floor();
+    final hours = (seconds / 3600).floor();
+    final minutes = ((seconds % 3600) / 60).floor();
     final remainingSeconds = seconds % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+    return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

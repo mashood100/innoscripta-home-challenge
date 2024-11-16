@@ -22,11 +22,9 @@ class TimerNotifier extends StateNotifier<TimerState> {
       final taskNotifier = _ref.read(taskStateProvider.notifier);
       final task = taskNotifier.state.tasks.firstWhere((t) => t.id == taskId);
       final updatedTask = task.copyWith(
-        duration: TaskDuration(
-          amount: (seconds / 60).ceil(), // Convert seconds to minutes
-          unit: 'minute'
-        )
-      );
+          duration: TaskDuration(
+              amount: (seconds / 60).ceil(), // Convert seconds to minutes
+              unit: 'minute'));
       await taskNotifier.updateTask(updatedTask);
     } catch (e) {
       // Handle error
@@ -85,7 +83,11 @@ class TimerNotifier extends StateNotifier<TimerState> {
     final updatedTimers = Map<String, TaskTimer>.from(state.taskTimers);
     updatedTimers.remove(taskId);
     state = state.copyWith(taskTimers: updatedTimers);
-    _saveState();
+
+    localStorage.remove('task_duration_$taskId');
+    localStorage.remove('timer_${taskId}_is_paused');
+    localStorage.remove('timer_${taskId}_start_time');
+
     updateTaskDuration(taskId, 0);
   }
 
@@ -112,13 +114,13 @@ class TimerNotifier extends StateNotifier<TimerState> {
     for (final entry in state.taskTimers.entries) {
       final taskId = entry.key;
       final timer = entry.value;
-      
+
       // Save duration
       await localStorage.setInt('task_duration_$taskId', timer.currentDuration);
-      
+
       // Save pause state
       await localStorage.setBool('timer_${taskId}_is_paused', timer.isPaused);
-      
+
       // Save start time only if timer is running
       if (!timer.isPaused && timer.startTime != null) {
         await localStorage.setString(
@@ -139,8 +141,10 @@ class TimerNotifier extends StateNotifier<TimerState> {
       if (task.id != null) {
         // Get the stored duration
         final duration = await getTaskDuration(task.id!);
-        final startTimeStr = localStorage.getString('timer_${task.id!}_start_time');
-        final isPaused = localStorage.getBool('timer_${task.id!}_is_paused') ?? true;
+        final startTimeStr =
+            localStorage.getString('timer_${task.id!}_start_time');
+        final isPaused =
+            localStorage.getBool('timer_${task.id!}_is_paused') ?? true;
 
         if (startTimeStr != null && startTimeStr.isNotEmpty && !isPaused) {
           final startTime = DateTime.parse(startTimeStr);

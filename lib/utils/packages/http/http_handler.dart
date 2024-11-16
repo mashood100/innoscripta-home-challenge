@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 
 class HttpHandler {
@@ -26,25 +25,10 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
-
-      // log('GET response: ${response.body}');
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       return response;
-    }
-    // on http.ClientException {
-    //   throw XymbiaServicesException(code: 'http-01');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during GET request: ${e.toString()}');
       rethrow;
     }
@@ -64,25 +48,12 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       log('POST response: ${response.body}');
 
       return response;
-    }
-    // on http.ClientException {
-    //   throw XymbiaServicesException(code: 'http-01');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during POST request: ${e.toString()}');
       rethrow;
     }
@@ -102,25 +73,10 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
-
-      log('PUT response: ${response.body}');
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       return response;
-    }
-    // on http.ClientException {
-    //   throw XymbiaServicesException(code: 'http-01');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during PUT request: ${e.toString()}');
       rethrow;
     }
@@ -141,25 +97,12 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       log('PATCH response: ${response.body}');
 
       return response;
-    }
-    //  on http.ClientException {
-    //   throw XymbiaServicesException(code: 'http-01');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during PATCH request: ${e.toString()}');
       rethrow;
     }
@@ -179,25 +122,12 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       log('DELETE response: ${response.body}');
 
       return response;
-    }
-    //  on http.ClientException {
-    //   throw XymbiaServicesException(code: 'http-01');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during DELETE request: ${e.toString()}');
       rethrow;
     }
@@ -217,25 +147,10 @@ class HttpHandler {
       final http.Response response =
           await http.Response.fromStream(streamedResponse);
 
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        String code = response.statusCode.toString();
-
-        if (response.body.startsWith('{')) {
-          code = jsonDecode(response.body)['code'];
-        }
-
-        // throw XymbiaServicesException(
-        //     code: code, status: response.statusCode.toString());
-      }
-
-      log('MULTIPART POST response: ${response.body}'); // Added debug logging
+      if (response.statusCode < 200 || response.statusCode > 299) {}
 
       return response;
-    }
-    // on http.ClientException {
-    //   throw XymbiaServicesException(code: 'todo-70');
-    // }
-    catch (e) {
+    } catch (e) {
       log('Error during MULTIPART POST request: ${e.toString()}');
       rethrow;
     }

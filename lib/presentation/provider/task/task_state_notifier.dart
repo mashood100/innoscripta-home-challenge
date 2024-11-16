@@ -127,11 +127,9 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       final updatedTasks = state.tasks.map((task) {
         if (task.id == taskId) {
           return task.copyWith(
-            duration: TaskDuration(
-              amount: (seconds / 60).ceil(), // Convert seconds to minutes
-              unit: 'minute'
-            )
-          );
+              duration: TaskDuration(
+                  amount: (seconds / 60).ceil(), // Convert seconds to minutes
+                  unit: 'minute'));
         }
         return task;
       }).toList();
