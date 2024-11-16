@@ -20,6 +20,7 @@ class TaskRow extends StatelessWidget {
     return SizedBox(
       height: 200,
       child: DragTarget<Task>(
+        
         onAccept: (task) {
           if (!task.labels!.contains(status)) {
             onTaskMoved(task, status);

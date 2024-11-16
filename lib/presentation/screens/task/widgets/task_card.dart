@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
@@ -12,7 +14,7 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Draggable<Task>(
+    return LongPressDraggable<Task>(
       data: task,
       feedback: Material(
         elevation: 4,
@@ -57,6 +59,17 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               _buildPriorityIndicator(context),
+              IconButton(
+                  onPressed: () async {
+                    await showMaterialModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => CreateTaskScreen(
+                        task: task,
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.edit))
             ],
           ),
           Space.y1,

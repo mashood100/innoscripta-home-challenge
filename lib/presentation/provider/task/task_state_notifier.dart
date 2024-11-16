@@ -56,21 +56,17 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
 
   Future<void> updateTaskStatus(Task task, String newStatus) async {
     try {
-      // Remove any existing status labels
       final currentLabels = task.labels!
           .where(
               (label) => !['todo', 'in_progress', 'completed'].contains(label))
           .toList();
 
-      // Add the new status label
       final updatedLabels = [...currentLabels, newStatus];
 
-      // Create updated task with new labels
       final updatedTask = task.copyWith(
         labels: updatedLabels,
       );
 
-      // Update the task in state
       final updatedTasks = state.tasks.map((t) {
         return t.id == task.id ? updatedTask : t;
       }).toList();
@@ -78,11 +74,31 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       state = state.copyWith(
         tasks: updatedTasks,
       );
-
-      // Persist changes
       await _taskUseCase.update(updatedTask);
       SnackbarHelper.snackbarWithTextOnly('Task status updated successfully');
     } catch (e) {
+      SnackbarHelper.snackbarWithTextOnly('Failed to update task status');
+      log('Update task status error: $e');
+    }
+  }
+
+  Future<void> updateTask(
+    Task task,
+  ) async {
+    final initialState = state;
+    try {
+      final updatedTask = task;
+      final updatedTasks = state.tasks.map((t) {
+        return t.id == task.id ? updatedTask : t;
+      }).toList();
+
+      state = state.copyWith(
+        tasks: updatedTasks,
+      );
+      await _taskUseCase.update(updatedTask);
+      SnackbarHelper.snackbarWithTextOnly('Task status updated successfully');
+    } catch (e) {
+      state = initialState;
       SnackbarHelper.snackbarWithTextOnly('Failed to update task status');
       log('Update task status error: $e');
     }
