@@ -1,5 +1,4 @@
 import 'dart:convert' as convert;
-import 'dart:developer';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 import 'package:innoscripta_home_challenge/data/source/network/task/tasks_api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
@@ -65,15 +64,14 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<List<Task>> getAll() async {
+  Future<List<Task>> getAll(String projectId) async {
     try {
-      final responseString = await _api.getAll();
+      final responseString = await _api.getAll(projectId);
       final List<dynamic> responseBody = convert.jsonDecode(responseString);
 
       var allTasks = responseBody
           .map((taskMap) => Task.fromDto(TaskDto.fromMap(taskMap)))
           .toList();
-      log("responseBody $allTasks");
       return allTasks;
     } catch (e) {
       rethrow;

@@ -11,8 +11,8 @@ import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
-  const TasksScreen({Key? key}) : super(key: key);
-
+  const TasksScreen({super.key, required this.projectID});
+  final String projectID;
   @override
   ConsumerState<TasksScreen> createState() => _TasksScreenState();
 }
@@ -28,7 +28,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   Future<void> _loadTasks() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final taskStateNotifier = ref.read(taskStateProvider.notifier);
-      await taskStateNotifier.getAllTasks();
+      await taskStateNotifier.getAllTasks(widget.projectID);
     });
   }
 
@@ -115,7 +115,9 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         await showMaterialModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (context) => const CreateTaskScreen(),
+          builder: (context) => CreateTaskScreen(
+            projectId: widget.projectID,
+          ),
         );
       }),
     );

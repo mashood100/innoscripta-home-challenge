@@ -1,0 +1,20 @@
+{
+    "projects": "Projekte",
+    "menu": "Menü",
+    "languages": "Sprachen",
+    "settings": "Einstellungen",
+    "createNewProject": "Neues Projekt erstellen",
+    "editProject": "Projekt bearbeiten",
+    "addNewProject": "Neues Projekt hinzufügen",
+    "projectTitle": "Projekttitel",
+    "projectColor": "Projektfarbe",
+    "pleaseEnterTitle": "Bitte geben Sie einen Titel ein",
+    "updateProject": "Projekt aktualisieren",
+    "createProject": "Projekt erstellen",
+    "deleteProject": "Projekt löschen",
+    "deleteProjectConfirm": "Sind Sie sicher, dass Sie dieses Projekt löschen möchten?",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "untitledProject": "Projekt ohne Titel",
+    "comments": "{count} Kommentare"
+}

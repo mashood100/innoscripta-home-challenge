@@ -16,7 +16,7 @@ final goRouter = GoRouter(
     GoRoute(
       path: '/',
       name: AppRoute.projects.name,
-      builder: (context, state) => const TasksScreen(),
+      builder: (context, state) => const ProjectScreen(),
       routes: [
         GoRoute(
           path: 'languages',
@@ -36,14 +36,14 @@ final goRouter = GoRouter(
           name: AppRoute.addProject.name,
           builder: (context, state) => const AddProjectBottomSheet(),
         ),
-        // GoRoute(
-        //   path: 'project/:id',
-        //   name: AppRoute.projectDetails.name,
-        //   builder: (context, state) {
-        //     final projectId = state.pathParameters['id']!;
-        //     return ProjectDetailScreen(projectId: projectId);
-        //   },
-        // ),
+        GoRoute(
+          path: 'task-screen/:id',
+          name: AppRoute.projectDetails.name,
+          builder: (context, state) {
+            final projectId = state.pathParameters['id']!;
+            return TasksScreen(projectID: projectId);
+          },
+        ),
       ],
     ),
   ],

@@ -1,4 +1,4 @@
-import 'package:innoscripta_home_challenge/configs/api/api_service.dart';
+import 'package:innoscripta_home_challenge/core/configs/api/api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 
 class ProjectsApiService extends ApiService {

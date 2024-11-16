@@ -68,10 +68,11 @@ class TaskCard extends ConsumerWidget {
                       backgroundColor: Colors.transparent,
                       builder: (context) => CreateTaskScreen(
                         task: task,
+                        projectId: task.parentId!,
                       ),
                     );
                   },
-                  icon: Icon(Icons.edit))
+                  icon: const Icon(Icons.edit))
             ],
           ),
           Space.y1,

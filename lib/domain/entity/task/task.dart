@@ -94,7 +94,6 @@ class Task extends TaskDto with EquatableMixin {
     );
   }
 
-  @override
   TaskDto toDto() {
     return TaskDto(
       id: id,

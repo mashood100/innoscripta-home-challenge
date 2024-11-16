@@ -20,37 +20,44 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   final Ref _ref;
   final TasksUseCases _taskUseCase;
 
-  Future<void> createTask(Task task) async {
-    try {
-      state = state.copyWith(status: TaskProviderState.loading);
-      await _taskUseCase.create(task);
+  Future<void> createTask(
+    Task newtask,
+  ) async {
+    // Store initial state for recovery in case of error
+    final initialState = state;
 
-      // After creating the task, get all tasks to ensure proper state
-      final tasks = await _taskUseCase.getAll();
+    try {
+      log("widget.projectId${newtask.projectId}");
+      state = state.copyWith(status: TaskProviderState.loading);
+      final createdTask = await _taskUseCase.create(newtask);
+
+      // Update local task list by adding the new task
+      final updatedTasks = [...state.tasks, createdTask];
 
       // Update durations map
       final taskDurations = Map<String, int>.from(state.taskDurations);
-      if (task.id != null) {
-        taskDurations[task.id!] = task.duration?.amount ?? 0;
+      if (createdTask.id != null) {
+        taskDurations[createdTask.id!] = createdTask.duration?.amount ?? 0;
       }
 
       state = state.copyWith(
         status: TaskProviderState.success,
-        tasks: tasks,
+        tasks: updatedTasks,
         taskDurations: taskDurations,
       );
     } catch (e) {
-      state = state.copyWith(
+      // Restore initial state on error
+      state = initialState.copyWith(
         status: TaskProviderState.error,
         errorMessage: e.toString(),
       );
     }
   }
 
-  Future<void> getAllTasks() async {
+  Future<void> getAllTasks(String projectId) async {
     try {
       state = state.copyWith(status: TaskProviderState.loading);
-      final tasks = await _taskUseCase.getAll();
+      final tasks = await _taskUseCase.getAll(projectId);
 
       // Create a map of task durations
       final taskDurations = {

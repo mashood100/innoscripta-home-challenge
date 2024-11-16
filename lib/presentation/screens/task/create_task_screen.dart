@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
@@ -10,8 +11,9 @@ import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 class CreateTaskScreen extends ConsumerStatefulWidget {
   final Task? task;
 
-  const CreateTaskScreen({Key? key, this.task}) : super(key: key);
-
+  const CreateTaskScreen({Key? key, this.task, required this.projectId})
+      : super(key: key);
+  final String projectId;
   @override
   ConsumerState<CreateTaskScreen> createState() => _CreateTaskScreenState();
 }
@@ -104,10 +106,12 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
             : null,
         priority: _priority,
         labels: _selectedLabels,
+        projectId: widget.projectId,
       );
 
       if (widget.task == null) {
-        await taskNotifier.createTask(task);
+        await taskNotifier
+            .createTask(task.copyWith(parentId: widget.projectId));
       } else {
         await taskNotifier.updateTask(task);
       }

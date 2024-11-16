@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/domain/repository/task/tasks_repository.dart';
 
@@ -42,9 +40,9 @@ class TasksUseCases {
     }
   }
 
-  Future<List<Task>> getAll() async {
+  Future<List<Task>> getAll(String projectId) async {
     try {
-      return await _repository.getAll();
+      return await _repository.getAll(projectId);
     } catch (e) {
       rethrow;
     }

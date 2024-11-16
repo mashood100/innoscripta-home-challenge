@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:innoscripta_home_challenge/core/config/language_config.dart';
+import 'package:innoscripta_home_challenge/core/configs/localization/language_config.dart';
 
 final languageProvider = StateProvider<String>((ref) => 'en');
 

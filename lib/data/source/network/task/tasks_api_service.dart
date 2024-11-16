@@ -1,16 +1,14 @@
-import 'dart:developer';
-
-import 'package:innoscripta_home_challenge/configs/api/api_service.dart';
+import 'package:innoscripta_home_challenge/core/configs/api/api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 
 class TasksApiService extends ApiService {
   TasksApiService() : super();
 
-  Future<String> getAll() async {
+  Future<String> getAll(String projectId) async {
     try {
       final requestData = RequestData(
         '/tasks',
-        queryParameters: {'project_id': "2343546180"},
+        queryParameters: {'project_id': projectId},
         RequestType.GET,
       );
 

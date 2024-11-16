@@ -5,5 +5,5 @@ abstract class TasksRepository {
   Future<Task> update(Task task);
   Future<void> delete(List<String?> ids);
   Future<Task> get(String id);
-  Future<List<Task>> getAll();
+  Future<List<Task>> getAll(String projectId);
 }

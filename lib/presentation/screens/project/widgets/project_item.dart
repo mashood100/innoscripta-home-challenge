@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
+import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:go_router/go_router.dart';
 
 class ProjectItem extends StatelessWidget {
   final Project project;
@@ -35,7 +37,10 @@ class ProjectItem extends StatelessWidget {
             ? const Icon(Icons.star, color: Colors.amber)
             : null,
         onTap: () {
-          // TODO: Implement project tap
+          context.pushNamed(
+            AppRoute.projectDetails.name,
+            pathParameters: {'id': project.id ?? ''},
+          );
         },
       ),
     );
