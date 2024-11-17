@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';

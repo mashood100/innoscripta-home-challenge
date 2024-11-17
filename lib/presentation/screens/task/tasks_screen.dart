@@ -8,7 +8,6 @@ import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_header.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_row.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shimmer/task_header_shimmer.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/empty_task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
@@ -57,15 +56,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
             style: AppText.titleLarge,
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: tasks.isEmpty
-              ? EmptyTaskState(status: status)
-              : TaskRow(
-                  tasks: tasks,
-                  status: status,
-                  onTaskMoved: _onTaskMoved,
-                ),
+        TaskRow(
+          tasks: tasks,
+          status: status,
+          onTaskMoved: _onTaskMoved,
         ),
       ],
     );

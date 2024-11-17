@@ -16,16 +16,18 @@ class ColorUtility {
     }
   }
 
-  static Color getPriorityColor(int priority) {
+  static Color getPriorityColor(int? priority) {
     switch (priority) {
-      case 4:
-        return Colors.red;
+      case 1:
+        return Colors.green;
+      case 2:
+        return Colors.blue;
       case 3:
         return Colors.orange;
-      case 2:
-        return Colors.yellow.shade800;
+      case 4:
+        return Colors.red;
       default:
-        return Colors.green;
+        return Colors.grey;
     }
   }
 }

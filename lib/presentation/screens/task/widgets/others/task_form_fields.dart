@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_input_field.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 
 class TaskFormFields extends StatelessWidget {
@@ -29,26 +30,18 @@ class TaskFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
+        TaskInputField(
           controller: titleController,
-          decoration: const InputDecoration(
-            labelText: 'Task Title',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter a title';
-            }
-            return null;
-          },
+          labelText: 'Task Title',
+          hintText: 'Enter task title',
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Title is required' : null,
         ),
         Space.y2,
-        TextFormField(
+        TaskInputField(
           controller: descriptionController,
-          decoration: const InputDecoration(
-            labelText: 'Description',
-            border: OutlineInputBorder(),
-          ),
+          labelText: 'Description',
+          hintText: 'Enter task description',
           maxLines: 3,
         ),
         Space.y2,
@@ -68,16 +61,50 @@ class TaskFormFields extends StatelessWidget {
         Text('Priority', style: AppText.titleSmall),
         Space.y1,
         SegmentedButton<int>(
-          segments: const [
-            ButtonSegment(value: 1, label: Text('Normal')),
-            ButtonSegment(value: 2, label: Text('Medium')),
-            ButtonSegment(value: 3, label: Text('High')),
-            ButtonSegment(value: 4, label: Text('Urgent')),
+          showSelectedIcon: false,
+          segments: [
+            ButtonSegment(
+              value: 1,
+              label: Text('Normal', style: TextStyle(fontSize: 12.sp)),
+            ),
+            ButtonSegment(
+              value: 2,
+              label: Text('Medium', style: TextStyle(fontSize: 12.sp)),
+            ),
+            ButtonSegment(
+              value: 3,
+              label: Text('High', style: TextStyle(fontSize: 12.sp)),
+            ),
+            ButtonSegment(
+              value: 4,
+              label: Text('Urgent', style: TextStyle(fontSize: 12.sp)),
+            ),
           ],
           selected: {priority},
           onSelectionChanged: (Set<int> newSelection) {
             onPriorityChanged(newSelection.first);
           },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>(
+              (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  switch (priority) {
+                    case 1:
+                      return Colors.green.withOpacity(0.5);
+                    case 2:
+                      return Colors.blue.withOpacity(0.5);
+                    case 3:
+                      return Colors.orange.withOpacity(0.5);
+                    case 4:
+                      return Colors.red.withOpacity(0.5);
+                    default:
+                      return Colors.grey.withOpacity(0.5);
+                  }
+                }
+                return Colors.transparent;
+              },
+            ),
+          ),
         ),
       ],
     );
@@ -133,7 +160,7 @@ class TaskFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Labels', style: AppText.titleSmall),
+        Text('Status:', style: AppText.titleSmall),
         Space.y1,
         Wrap(
           spacing: 8.r,
