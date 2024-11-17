@@ -41,10 +41,9 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<void> delete(List<String?> ids) async {
+  Future<void> delete(Task task) async {
     try {
-      String taskIdsString = ids.join(',');
-      await _api.delete(taskIdsString);
+      await _api.delete(task);
     } catch (e) {
       rethrow;
     }

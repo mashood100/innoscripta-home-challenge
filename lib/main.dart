@@ -55,7 +55,6 @@ class _MyAppState extends ConsumerState<MyApp> {
       darkTheme: themeDark,
       scaffoldMessengerKey: SnackbarHelper.scaffoldMessengerKey,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      // home: const ProjectScreen(),
     );
   }
 }

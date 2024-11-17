@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_row.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
   const TasksScreen({super.key, required this.projectID});
@@ -112,15 +112,15 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        await showMaterialModalBottomSheet(
-          context: context,
-          backgroundColor: Colors.transparent,
-          builder: (context) => CreateTaskScreen(
-            projectId: widget.projectID,
-          ),
-        );
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.pushNamed(
+            AppRoute.createTask.name,
+            pathParameters: {'projectId': widget.projectID},
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

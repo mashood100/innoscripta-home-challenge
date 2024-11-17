@@ -1,31 +1,15 @@
 import 'package:innoscripta_home_challenge/core/configs/api/api_service.dart';
-import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
+import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 
-class TasksApiService extends ApiService {
-  TasksApiService() : super();
+class CommentsApiService extends ApiService {
+  CommentsApiService() : super();
 
-  Future<String> getAll(String projectId) async {
+  Future<String> getAllForTask(String taskId) async {
     try {
       final requestData = RequestData(
-        '/tasks',
-        queryParameters: {'project_id': projectId},
+        '/comments',
         RequestType.GET,
-      );
-
-      final response = await makeRequest(requestData);
-
-      return response.body;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<String> create(Map<String, dynamic> task) async {
-    try {
-      final requestData = RequestData(
-        '/tasks',
-        RequestType.POST,
-        payload: task,
+        queryParameters: {'task_id': taskId},
       );
       final response = await makeRequest(requestData);
       return response.body;
@@ -34,16 +18,55 @@ class TasksApiService extends ApiService {
     }
   }
 
-  Future<String> update(Task task) async {
+  Future<String> getAllForProject(String projectId) async {
     try {
       final requestData = RequestData(
-        '/tasks/${task.id}',
-        RequestType.POST,
-        payload: task.toMap(),
+        '/comments',
+        RequestType.GET,
+        queryParameters: {'project_id': projectId},
       );
       final response = await makeRequest(requestData);
-
       return response.body;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> create(Map<String, dynamic> comment) async {
+    try {
+      final requestData = RequestData(
+        '/comments',
+        RequestType.POST,
+        payload: comment,
+      );
+      final response = await makeRequest(requestData);
+      return response.body;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> update(Comment comment) async {
+    try {
+      final requestData = RequestData(
+        '/comments/${comment.id}',
+        RequestType.POST,
+        payload: comment.toMap(),
+      );
+      final response = await makeRequest(requestData);
+      return response.body;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> delete(String id) async {
+    try {
+      final requestData = RequestData(
+        '/comments/$id',
+        RequestType.DELETE,
+      );
+      await makeRequest(requestData);
     } catch (e) {
       rethrow;
     }
@@ -52,23 +75,11 @@ class TasksApiService extends ApiService {
   Future<String> get(String id) async {
     try {
       final requestData = RequestData(
-        '/tasks/$id',
+        '/comments/$id',
         RequestType.GET,
       );
       final response = await makeRequest(requestData);
       return response.body;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> delete(Task task) async {
-    try {
-      final requestData = RequestData(
-        '/tasks/${task.id}',
-        RequestType.DELETE,
-      );
-      await makeRequest(requestData);
     } catch (e) {
       rethrow;
     }

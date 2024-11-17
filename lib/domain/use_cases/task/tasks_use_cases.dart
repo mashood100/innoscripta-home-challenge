@@ -24,9 +24,9 @@ class TasksUseCases {
     }
   }
 
-  Future<void> delete(List<String?> ids) async {
+  Future<void> delete(Task task) async {
     try {
-      return await _repository.delete(ids);
+      return await _repository.delete(task);
     } catch (e) {
       rethrow;
     }

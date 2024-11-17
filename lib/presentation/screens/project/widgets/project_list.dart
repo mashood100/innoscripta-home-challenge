@@ -10,9 +10,9 @@ class ProjectList extends ConsumerWidget {
   final List<Project> projects;
 
   const ProjectList({
-    Key? key,
+    super.key,
     required this.projects,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,11 +25,10 @@ class ProjectList extends ConsumerWidget {
             children: [
               SlidableAction(
                 onPressed: (context) {
-                  // Handle edit action
                   _handleEdit(context, projects[index]);
                 },
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                foregroundColor: Colors.blue,
                 icon: Icons.edit,
                 label: 'Edit',
               ),
@@ -42,8 +41,8 @@ class ProjectList extends ConsumerWidget {
                 onPressed: (context) {
                   _handleDelete(context, ref, projects[index]);
                 },
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                foregroundColor: Colors.red,
                 icon: Icons.delete,
                 label: 'Delete',
               ),
@@ -56,6 +55,7 @@ class ProjectList extends ConsumerWidget {
     );
   }
 
+//================================    UI methods  ====================
   void _handleEdit(BuildContext context, Project project) {
     showModalBottomSheet(
       context: context,
@@ -81,8 +81,8 @@ class ProjectList extends ConsumerWidget {
 
               ref.read(projectStateProvider.notifier).deleteProject(project.id);
             },
-            child: const Text('Delete'),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Delete'),
           ),
         ],
       ),

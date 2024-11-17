@@ -5,4 +5,6 @@ enum AppRoute {
   editProject,
   addProject,
   projectDetails,
+  createTask,
+  comments,
 }

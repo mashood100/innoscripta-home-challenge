@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 
 class TaskFormFields extends StatelessWidget {
@@ -127,9 +128,6 @@ class TaskFormFields extends StatelessWidget {
       'todo',
       'in_progress',
       'completed',
-      'important',
-      'personal',
-      'work',
     ];
 
     return Column(
@@ -138,21 +136,19 @@ class TaskFormFields extends StatelessWidget {
         Text('Labels', style: AppText.titleSmall),
         Space.y1,
         Wrap(
-          spacing: 8,
-          runSpacing: 8,
+          spacing: 8.r,
+          runSpacing: 8.r,
           children: availableLabels.map((label) {
             final isSelected = selectedLabels.contains(label);
-            return FilterChip(
+            return ChoiceChip(
               label: Text(label),
               selected: isSelected,
               onSelected: (selected) {
-                final newLabels = List<String>.from(selectedLabels);
                 if (selected) {
-                  newLabels.add(label);
+                  onLabelsChanged([label]);
                 } else {
-                  newLabels.remove(label);
+                  onLabelsChanged([]);
                 }
-                onLabelsChanged(newLabels);
               },
             );
           }).toList(),

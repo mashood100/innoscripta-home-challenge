@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:innoscripta_home_challenge/core/utils/packages/http/http_handler.dart';
+import 'package:innoscripta_home_challenge/core/packages/http/http_handler.dart';
 
 enum RequestType { GET, POST, PUT, PATCH, DELETE, MULTIPART }
 

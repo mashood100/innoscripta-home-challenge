@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_details_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 
 class TaskCard extends ConsumerWidget {
   final Task task;
@@ -30,7 +31,16 @@ class TaskCard extends ConsumerWidget {
         opacity: 0.5,
         child: _buildCardContent(context),
       ),
-      child: _buildCardContent(context),
+      child: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => TaskDetailsBottomSheet(task: task),
+            );
+          },
+          child: _buildCardContent(context)),
     );
   }
 
@@ -62,17 +72,15 @@ class TaskCard extends ConsumerWidget {
               ),
               _buildPriorityIndicator(context),
               IconButton(
-                  onPressed: () async {
-                    await showMaterialModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => CreateTaskScreen(
-                        task: task,
-                        projectId: task.parentId!,
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.edit))
+                onPressed: () {
+                  context.pushNamed(
+                    AppRoute.createTask.name,
+                    pathParameters: {'projectId': task.projectId!},
+                    extra: task,
+                  );
+                },
+                icon: const Icon(Icons.edit),
+              ),
             ],
           ),
           Space.y1,

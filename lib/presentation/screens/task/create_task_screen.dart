@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
@@ -10,10 +9,14 @@ import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 
 class CreateTaskScreen extends ConsumerStatefulWidget {
   final Task? task;
-
-  const CreateTaskScreen({Key? key, this.task, required this.projectId})
-      : super(key: key);
   final String projectId;
+
+  const CreateTaskScreen({
+    Key? key,
+    this.task,
+    required this.projectId,
+  }) : super(key: key);
+
   @override
   ConsumerState<CreateTaskScreen> createState() => _CreateTaskScreenState();
 }
@@ -41,25 +44,22 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.task == null ? 'Create New Task' : 'Edit Task'),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: Space.all(),
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildHeader(context),
-                Space.y2,
                 TaskFormFields(
                   titleController: _titleController,
                   descriptionController: _descriptionController,
@@ -75,10 +75,8 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
                 Space.y2,
                 ElevatedButton(
                   onPressed: _saveTask,
-                  child:
-                      Text(widget.task == null ? 'Create Task' : 'Update Task'),
+                  child: Text(widget.task == null ? 'Create Task' : 'Update Task'),
                 ),
-                Space.y2,
               ],
             ),
           ),
@@ -118,21 +116,5 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
 
       if (mounted) Navigator.pop(context);
     }
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          widget.task == null ? 'Create New Task' : 'Edit Task',
-          style: AppText.titleLarge,
-        ),
-        IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ],
-    );
   }
 }

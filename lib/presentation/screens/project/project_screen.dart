@@ -7,6 +7,8 @@ import 'package:innoscripta_home_challenge/presentation/shared/widgets/drawer/ho
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_list.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/shimmer/project_shimmer.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/empty_project_state.dart';
 
 class ProjectScreen extends ConsumerStatefulWidget {
   const ProjectScreen({super.key});
@@ -34,6 +36,7 @@ class _ProjectScreenState extends ConsumerState<ProjectScreen> {
     App.init(context);
     ScreenUtil.init(context, designSize: const Size(390, 848));
     final projectState = ref.watch(projectStateProvider);
+    final isDarkMode = ref.watch(themeProvider);
 
     return Scaffold(
         drawer: const HomeScreenDrawer(),
@@ -46,19 +49,22 @@ class _ProjectScreenState extends ConsumerState<ProjectScreen> {
                 title: const Text('Projects'),
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.face),
-                    onPressed: () {},
+                    icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+                    onPressed: () {
+                      ref.read(themeProvider.notifier).toggleTheme();
+                    },
                   ),
                 ],
               ),
               if (projectState.status == ProjectProviderState.loading)
-                const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()),
-                )
+                const ProjectShimmer()
               else if (projectState.status == ProjectProviderState.error)
                 SliverFillRemaining(
                   child: Center(child: Text(projectState.errorMessage)),
                 )
+              else if (projectState.projects.isEmpty &&
+                  projectState.status == ProjectProviderState.success)
+                const EmptyProjectState()
               else
                 ProjectList(projects: projectState.projects),
             ],
