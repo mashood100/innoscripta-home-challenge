@@ -1,16 +1,19 @@
-import 'dart:math' show max;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
+import 'package:innoscripta_home_challenge/presentation/provider/task/task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_row.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_header.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_row.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shrimmer/task_header_shimmer.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/empty_task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:go_router/go_router.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shrimmer/task_section_shimmer.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
   const TasksScreen({super.key, required this.project});
@@ -23,7 +26,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
   @override
   void initState() {
     super.initState();
-
     _loadTasks();
   }
 
@@ -39,107 +41,67 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     ref.read(taskStateProvider.notifier).updateTaskStatus(task, newStatus);
   }
 
+  Widget _buildTaskSection(String title, List<Task> tasks, String status, bool isLoading) {
+    if (isLoading) {
+      return const TaskSectionShimmer();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: Space.all(),
+          child: Text(
+            '$title (${tasks.length})',
+            style: AppText.titleLarge,
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: tasks.isEmpty
+              ? EmptyTaskState(status: status)
+              : TaskRow(
+                  tasks: tasks,
+                  status: status,
+                  onTaskMoved: _onTaskMoved,
+                ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final taskState = ref.watch(taskStateProvider);
     App.init(context);
     ScreenUtil.init(context, designSize: const Size(390, 848));
-    final todoTasks =
-        taskState.tasks.where((task) => task.labels!.contains('todo')).toList();
-    final inProgressTasks = taskState.tasks
-        .where((task) => task.labels!.contains('in_progress'))
-        .toList();
-    final completedTasks = taskState.tasks
-        .where((task) => task.labels!.contains('completed'))
-        .toList();
-    final totalTasks = taskState.tasks.length;
+    
+    final todoTasks = taskState.tasks.where((task) => task.labels!.contains('todo')).toList();
+    final inProgressTasks = taskState.tasks.where((task) => task.labels!.contains('in_progress')).toList();
+    final completedTasks = taskState.tasks.where((task) => task.labels!.contains('completed')).toList();
+    
+    final isLoading = taskState.status == TaskProviderState.loading;
+    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back_ios),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.project.name ?? 'Project',
-                                style: AppText.titleLargeSemiBold,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                '$totalTasks tasks',
-                                style: AppText.bodySmall.copyWith(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 12.r, left: 10.r),
-                            child: CircleAvatar(
-                              radius: 10.r,
-                              backgroundColor: ColorUtility.getColorFromString(
-                                  widget.project.color!),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+              if (isLoading)
+                const TaskHeaderShimmer()
+              else
+                TaskHeader(
+                  project: widget.project,
+                  totalTasks: taskState.tasks.length,
                 ),
-              ),
-              // Main Content
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: Space.all(),
-                    child: Text('To Do', style: AppText.titleLarge),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: TaskRow(
-                      tasks: todoTasks,
-                      status: 'todo',
-                      onTaskMoved: _onTaskMoved,
-                    ),
-                  ),
+                  _buildTaskSection('To Do', todoTasks, 'todo', isLoading),
                   Space.y2,
-                  Padding(
-                    padding: Space.all(),
-                    child: Text('In Progress', style: AppText.titleLarge),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: TaskRow(
-                      tasks: inProgressTasks,
-                      status: 'in_progress',
-                      onTaskMoved: _onTaskMoved,
-                    ),
-                  ),
+                  _buildTaskSection('In Progress', inProgressTasks, 'in_progress', isLoading),
                   Space.y2,
-                  Padding(
-                    padding: Space.all(),
-                    child: Text('Completed', style: AppText.titleLarge),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: TaskRow(
-                      tasks: completedTasks,
-                      status: 'completed',
-                      onTaskMoved: _onTaskMoved,
-                    ),
-                  ),
+                  _buildTaskSection('Completed', completedTasks, 'completed', isLoading),
                   Space.yf(150),
                 ],
               ),

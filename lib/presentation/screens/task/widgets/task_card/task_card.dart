@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_details_bottom_sheet.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/task_details_bottom_sheet.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +23,6 @@ class TaskCard extends ConsumerWidget {
         elevation: 4,
         borderRadius: UIProps.radius,
         child: SizedBox(
-          width: 200,
           child: _buildCardContent(context, isDragging: true),
         ),
       ),

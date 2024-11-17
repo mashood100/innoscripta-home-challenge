@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_card.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 
 class TaskRow extends StatelessWidget {

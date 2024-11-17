@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_form_fields.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/task_form_fields.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';

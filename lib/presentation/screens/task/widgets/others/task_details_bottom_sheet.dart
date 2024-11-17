@@ -5,7 +5,7 @@ import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
 
 class TaskDetailsBottomSheet extends ConsumerWidget {
   final Task task;
