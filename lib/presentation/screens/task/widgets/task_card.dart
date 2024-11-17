@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
@@ -44,6 +46,8 @@ class TaskCard extends ConsumerWidget {
     );
   }
 
+  // ================================ Other Widget ==========================
+
   Widget _buildCardContent(BuildContext context, {bool isDragging = false}) {
     return Container(
       margin: isDragging ? null : EdgeInsets.only(top: 10.r, bottom: 10.r),
@@ -71,6 +75,8 @@ class TaskCard extends ConsumerWidget {
         children: [
           Row(
             children: [
+              _getTaskIcon(task.labels?.first ?? 'todo'),
+              Space.x,
               Expanded(
                 child: Text(
                   task.content ?? 'Untitled Task',
@@ -79,13 +85,12 @@ class TaskCard extends ConsumerWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Space.x,
-              _buildPriorityIndicator(context),
             ],
           ),
-          if (task.description != null) ...[
+          if (task.description != "") ...[
+            Space.y,
             Text(
-              task.description!,
+              task.description ?? "",
               style: AppText.bodySmall,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -95,6 +100,18 @@ class TaskCard extends ConsumerWidget {
             Space.y1,
             _buildDueDate(context),
           ],
+          Space.y,
+          Row(
+            children: [
+              Text(
+                "Priority: ",
+                style: AppText.labelMediumSemiBold,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              _buildPriorityIndicator(context),
+            ],
+          ),
           if (task.labels!.contains('in_progress')) ...[
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -145,35 +162,17 @@ class TaskCard extends ConsumerWidget {
     }
   }
 
-  Widget _buildLabels(BuildContext context) {
-    final displayLabels = task.labels
-            ?.where(
-              (label) => !['todo', 'in_progress', 'completed'].contains(label),
-            )
-            .toList() ??
-        [];
-
-    if (displayLabels.isEmpty) return const SizedBox.shrink();
-
-    return Wrap(
-      spacing: 4,
-      runSpacing: 4,
-      children: displayLabels.map((label) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(
-            label,
-            style: AppText.labelSmall.copyWith(
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-        );
-      }).toList(),
-    );
+  Widget _getTaskIcon(String label) {
+    switch (label) {
+      case 'completed':
+        return Image.asset('assets/done.png', width: 18.r, height: 18.r);
+      case 'in_progress':
+        return Image.asset('assets/inprogress.png', width: 18.r, height: 18.r);
+      case 'todo':
+        return Image.asset('assets/todo.png', width: 18.r, height: 18.r);
+      default:
+        return Image.asset('assets/todo.png', width: 18.r, height: 18.r);
+    }
   }
 
   Widget _buildDueDate(BuildContext context) {
