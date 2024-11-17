@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_details_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/timer_button.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 
 class TaskCard extends ConsumerWidget {
   final Task task;
@@ -46,14 +46,23 @@ class TaskCard extends ConsumerWidget {
 
   Widget _buildCardContent(BuildContext context, {bool isDragging = false}) {
     return Container(
-      width: 200,
-      height: 180,
+      margin: isDragging ? null : EdgeInsets.only(top: 10.r, bottom: 10.r),
+      width: 300.r,
       padding: Space.all(),
       decoration: BoxDecoration(
+        boxShadow: isDragging
+            ? null
+            : const [
+                BoxShadow(
+                  offset: Offset(0, 2),
+                  blurRadius: 8,
+                  color: Color.fromARGB(76, 89, 89, 89),
+                ),
+              ],
         color: Theme.of(context).cardColor,
         borderRadius: UIProps.radius,
         border: Border.all(
-          color: Theme.of(context).dividerColor,
+          color: ColorUtility.getPriorityColor(task.priority ?? 1),
         ),
       ),
       child: Column(
@@ -65,25 +74,15 @@ class TaskCard extends ConsumerWidget {
               Expanded(
                 child: Text(
                   task.content ?? 'Untitled Task',
-                  style: AppText.titleMedium,
-                  maxLines: 2,
+                  style: AppText.titleMediumBold,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              Space.x,
               _buildPriorityIndicator(context),
-              IconButton(
-                onPressed: () {
-                  context.pushNamed(
-                    AppRoute.createTask.name,
-                    pathParameters: {'projectId': task.projectId!},
-                    extra: task,
-                  );
-                },
-                icon: const Icon(Icons.edit),
-              ),
             ],
           ),
-          Space.y1,
           if (task.description != null) ...[
             Text(
               task.description!,
@@ -91,10 +90,7 @@ class TaskCard extends ConsumerWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            Space.y1,
           ],
-          const SizedBox(height: 8),
-          _buildLabels(context),
           if (task.due != null) ...[
             Space.y1,
             _buildDueDate(context),
@@ -105,18 +101,13 @@ class TaskCard extends ConsumerWidget {
               children: [
                 Consumer(
                   builder: (context, ref, _) {
-                    return Row(
-                      children: [
-                        TimerButton(
-                          task: task,
-                        )
-                      ],
+                    return TimerButton(
+                      task: task,
                     );
                   },
                 ),
               ],
             ),
-            Space.y1,
           ],
         ],
       ),
@@ -125,7 +116,7 @@ class TaskCard extends ConsumerWidget {
 
   Widget _buildPriorityIndicator(BuildContext context) {
     final priorityLevel = task.priority ?? 1;
-    final color = _getPriorityColor(priorityLevel);
+    final color = ColorUtility.getPriorityColor(priorityLevel);
     final label = _getPriorityLabel(priorityLevel);
 
     return Container(
@@ -139,19 +130,6 @@ class TaskCard extends ConsumerWidget {
         style: AppText.labelSmall.copyWith(color: color),
       ),
     );
-  }
-
-  Color _getPriorityColor(int priority) {
-    switch (priority) {
-      case 4:
-        return Colors.red;
-      case 3:
-        return Colors.orange;
-      case 2:
-        return Colors.yellow.shade800;
-      default:
-        return Colors.green;
-    }
   }
 
   String _getPriorityLabel(int priority) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
@@ -18,9 +19,9 @@ class TaskRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 150.h,
+      width: MediaQuery.of(context).size.width,
       child: DragTarget<Task>(
-        
         onAccept: (task) {
           if (!task.labels!.contains(status)) {
             onTaskMoved(task, status);
@@ -40,8 +41,11 @@ class TaskRow extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: Space.h.add(const EdgeInsets.only(right: 8)),
-                  child: TaskCard(
-                    task: tasks[index],
+                  child: SizedBox(
+                    width: 300.w,
+                    child: TaskCard(
+                      task: tasks[index],
+                    ),
                   ),
                 );
               },

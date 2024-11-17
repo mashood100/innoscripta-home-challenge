@@ -108,14 +108,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      width: max(MediaQuery.of(context).size.width,
-                          todoTasks.length * 300.0),
-                      child: TaskRow(
-                        tasks: todoTasks,
-                        status: 'todo',
-                        onTaskMoved: _onTaskMoved,
-                      ),
+                    child: TaskRow(
+                      tasks: todoTasks,
+                      status: 'todo',
+                      onTaskMoved: _onTaskMoved,
                     ),
                   ),
                   Space.y2,
@@ -125,14 +121,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      width: max(MediaQuery.of(context).size.width,
-                          inProgressTasks.length * 300.0),
-                      child: TaskRow(
-                        tasks: inProgressTasks,
-                        status: 'in_progress',
-                        onTaskMoved: _onTaskMoved,
-                      ),
+                    child: TaskRow(
+                      tasks: inProgressTasks,
+                      status: 'in_progress',
+                      onTaskMoved: _onTaskMoved,
                     ),
                   ),
                   Space.y2,
@@ -142,14 +134,10 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      width: max(MediaQuery.of(context).size.width,
-                          completedTasks.length * 300.0),
-                      child: TaskRow(
-                        tasks: completedTasks,
-                        status: 'completed',
-                        onTaskMoved: _onTaskMoved,
-                      ),
+                    child: TaskRow(
+                      tasks: completedTasks,
+                      status: 'completed',
+                      onTaskMoved: _onTaskMoved,
                     ),
                   ),
                   Space.yf(150),

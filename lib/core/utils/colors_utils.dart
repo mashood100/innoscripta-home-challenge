@@ -15,4 +15,17 @@ class ColorUtility {
         return const Color.fromARGB(255, 37, 117, 255);
     }
   }
+
+  static Color getPriorityColor(int priority) {
+    switch (priority) {
+      case 4:
+        return Colors.red;
+      case 3:
+        return Colors.orange;
+      case 2:
+        return Colors.yellow.shade800;
+      default:
+        return Colors.green;
+    }
+  }
 }
