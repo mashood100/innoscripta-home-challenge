@@ -56,9 +56,9 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
       child: SingleChildScrollView(
         controller: ModalScrollController.of(context),
         child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
           ),
           padding: EdgeInsets.only(
             left: 24,

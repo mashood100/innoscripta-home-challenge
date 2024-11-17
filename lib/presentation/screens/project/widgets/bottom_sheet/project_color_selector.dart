@@ -35,7 +35,7 @@ class ProjectColorSelector extends ConsumerWidget {
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: selectedColor == color
-                        ? Colors.black
+                        ? Theme.of(context).colorScheme.onBackground
                         : Colors.transparent,
                     width: 2,
                   ),

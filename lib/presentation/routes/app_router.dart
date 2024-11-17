@@ -40,11 +40,11 @@ final goRouter = GoRouter(
           builder: (context, state) => const AddProjectBottomSheet(),
         ),
         GoRoute(
-          path: 'task-screen/:id',
+          path: 'task-screen/:projectId',
           name: AppRoute.projectDetails.name,
           builder: (context, state) {
-            final projectId = state.pathParameters['id']!;
-            return TasksScreen(projectID: projectId);
+            final project = state.extra as Project;
+            return TasksScreen(project: project);
           },
         ),
         GoRoute(

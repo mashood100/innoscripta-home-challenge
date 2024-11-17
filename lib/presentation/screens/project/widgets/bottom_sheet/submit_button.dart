@@ -14,6 +14,10 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
+      // style: ElevatedButton.styleFrom(
+      //   backgroundColor: Theme.of(context).primaryColor,
+      //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      // ),
       child: Text(
         isEditing ? 'Update Project' : 'Create Project',
       ),

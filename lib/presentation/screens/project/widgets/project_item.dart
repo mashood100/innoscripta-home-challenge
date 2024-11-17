@@ -22,7 +22,8 @@ class ProjectItem extends StatelessWidget {
         onTap: () {
           context.pushNamed(
             AppRoute.projectDetails.name,
-            pathParameters: {'id': project.id ?? ''},
+            pathParameters: {'projectId': project.id.toString()},
+            extra: project,
           );
         },
         child: Container(
