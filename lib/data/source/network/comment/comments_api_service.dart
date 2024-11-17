@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:innoscripta_home_challenge/core/configs/api/api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 
@@ -54,6 +56,7 @@ class CommentsApiService extends ApiService {
         payload: comment.toMap(),
       );
       final response = await makeRequest(requestData);
+
       return response.body;
     } catch (e) {
       rethrow;

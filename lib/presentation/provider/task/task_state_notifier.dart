@@ -43,7 +43,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       );
     } catch (e) {
       state = initialState.copyWith(
-        status: TaskProviderState.error,
+        status: TaskProviderState.initial,
         errorMessage: e.toString(),
       );
     }
@@ -67,7 +67,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       );
     } catch (e) {
       state = state.copyWith(
-        status: TaskProviderState.error,
+        status: TaskProviderState.initial,
         errorMessage: e.toString(),
       );
     }
@@ -117,7 +117,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       );
     } catch (e) {
       state = state.copyWith(
-        status: TaskProviderState.error,
+        status: TaskProviderState.initial,
         errorMessage: e.toString(),
       );
     }
@@ -163,9 +163,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
     final initialState = state;
 
     try {
-      state = state.copyWith(status: TaskProviderState.loading);
       await _taskUseCase.delete(task);
-
       final updatedTasks = state.tasks.where((t) => t.id != task.id).toList();
       final updatedDurations = Map<String, int>.from(state.taskDurations)
         ..remove(task.id);
@@ -175,11 +173,11 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
         tasks: updatedTasks,
         taskDurations: updatedDurations,
       );
-      
+
       SnackbarHelper.snackbarWithTextOnly('Task deleted successfully');
     } catch (e) {
       state = initialState.copyWith(
-        status: TaskProviderState.error,
+        status: TaskProviderState.initial,
         errorMessage: e.toString(),
       );
       SnackbarHelper.snackbarWithTextOnly('Failed to delete task');

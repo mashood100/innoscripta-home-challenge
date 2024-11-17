@@ -60,31 +60,57 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
 
   Widget _buildCommentInput() {
     return Container(
-      padding: Space.all(),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        border: Border(
-          top: BorderSide(
-            color: Theme.of(context).dividerColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            offset: const Offset(0, -1),
+            blurRadius: 4,
           ),
-        ),
+        ],
       ),
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              controller: _commentController,
-              decoration: const InputDecoration(
-                hintText: 'Add a comment...',
-                border: OutlineInputBorder(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(
+                  color: Theme.of(context).dividerColor,
+                ),
               ),
-              maxLines: null,
+              child: TextField(
+                controller: _commentController,
+                decoration: InputDecoration(
+                  hintText: 'Add a comment...',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[400],
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
+                maxLines: null,
+              ),
             ),
           ),
-          Space.x1,
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: _handleAddComment,
+          Space.x2,
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.send, color: Colors.white),
+              onPressed: _handleAddComment,
+            ),
           ),
         ],
       ),

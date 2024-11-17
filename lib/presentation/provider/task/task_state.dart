@@ -1,7 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 
-enum TaskProviderState { initial, loading, success, error }
+enum TaskProviderState {
+  initial,
+  loading,
+  success,
+}
 
 class TaskState extends Equatable {
   final TaskProviderState status;
@@ -40,4 +44,4 @@ class TaskState extends Equatable {
 
   @override
   List<Object?> get props => [status, tasks, errorMessage, taskDurations];
-} 
+}
