@@ -19,7 +19,7 @@ class TaskRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180.h,
+      height: 200.h,
       width: MediaQuery.of(context).size.width,
       child: DragTarget<Task>(
         onAccept: (task) {

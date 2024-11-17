@@ -7,13 +7,13 @@ import 'package:innoscripta_home_challenge/presentation/provider/task/task_state
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_header.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_card/task_row.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shrimmer/task_header_shimmer.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shimmer/task_header_shimmer.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/empty_task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:go_router/go_router.dart';
-import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shrimmer/task_section_shimmer.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shimmer/task_section_shimmer.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
   const TasksScreen({super.key, required this.project});
@@ -41,7 +41,8 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     ref.read(taskStateProvider.notifier).updateTaskStatus(task, newStatus);
   }
 
-  Widget _buildTaskSection(String title, List<Task> tasks, String status, bool isLoading) {
+  Widget _buildTaskSection(
+      String title, List<Task> tasks, String status, bool isLoading) {
     if (isLoading) {
       return const TaskSectionShimmer();
     }
@@ -50,7 +51,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: Space.all(),
+          padding: Space.all(15),
           child: Text(
             '$title (${tasks.length})',
             style: AppText.titleLarge,
@@ -75,13 +76,18 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     final taskState = ref.watch(taskStateProvider);
     App.init(context);
     ScreenUtil.init(context, designSize: const Size(390, 848));
-    
-    final todoTasks = taskState.tasks.where((task) => task.labels!.contains('todo')).toList();
-    final inProgressTasks = taskState.tasks.where((task) => task.labels!.contains('in_progress')).toList();
-    final completedTasks = taskState.tasks.where((task) => task.labels!.contains('completed')).toList();
-    
+
+    final todoTasks =
+        taskState.tasks.where((task) => task.labels!.contains('todo')).toList();
+    final inProgressTasks = taskState.tasks
+        .where((task) => task.labels!.contains('in_progress'))
+        .toList();
+    final completedTasks = taskState.tasks
+        .where((task) => task.labels!.contains('completed'))
+        .toList();
+
     final isLoading = taskState.status == TaskProviderState.loading;
-    
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -99,9 +105,11 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                 children: [
                   _buildTaskSection('To Do', todoTasks, 'todo', isLoading),
                   Space.y2,
-                  _buildTaskSection('In Progress', inProgressTasks, 'in_progress', isLoading),
+                  _buildTaskSection(
+                      'In Progress', inProgressTasks, 'in_progress', isLoading),
                   Space.y2,
-                  _buildTaskSection('Completed', completedTasks, 'completed', isLoading),
+                  _buildTaskSection(
+                      'Completed', completedTasks, 'completed', isLoading),
                   Space.yf(150),
                 ],
               ),

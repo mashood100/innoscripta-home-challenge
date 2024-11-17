@@ -46,38 +46,87 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.task == null ? 'Create New Task' : 'Edit Task'),
+        title: Text(
+          widget.task == null ? 'Create New Task' : 'Edit Task',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Padding(
-          padding: Space.all(),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TaskFormFields(
-                  titleController: _titleController,
-                  descriptionController: _descriptionController,
-                  dueDate: _dueDate,
-                  priority: _priority,
-                  selectedLabels: _selectedLabels,
-                  onDueDateChanged: (date) => setState(() => _dueDate = date),
-                  onPriorityChanged: (value) =>
-                      setState(() => _priority = value),
-                  onLabelsChanged: (labels) =>
-                      setState(() => _selectedLabels = labels),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: Space.all(),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextFormField(
+                      controller: _titleController,
+                      decoration: InputDecoration(
+                        labelText: 'Task Title',
+                        hintText: 'Enter task title',
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      validator: (value) =>
+                          value?.isEmpty ?? true ? 'Title is required' : null,
+                    ),
+                    Space.y2,
+                    TextFormField(
+                      controller: _descriptionController,
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                        hintText: 'Enter task description',
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      maxLines: 3,
+                    ),
+                    Space.y2,
+                    TaskFormFields(
+                      titleController: _titleController,
+                      descriptionController: _descriptionController,
+                      dueDate: _dueDate,
+                      priority: _priority,
+                      selectedLabels: _selectedLabels,
+                      onDueDateChanged: (date) => setState(() => _dueDate = date),
+                      onPriorityChanged: (value) => setState(() => _priority = value),
+                      onLabelsChanged: (labels) => setState(() => _selectedLabels = labels),
+                    ),
+                    Space.y3,
+                    ElevatedButton(
+                      onPressed: _saveTask,
+                      style: ElevatedButton.styleFrom(
+                        padding: Space.all(1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        widget.task == null ? 'Create Task' : 'Update Task',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Space.y2,
-                ElevatedButton(
-                  onPressed: _saveTask,
-                  child: Text(widget.task == null ? 'Create Task' : 'Update Task'),
-                ),
-              ],
+              ),
             ),
           ),
         ),

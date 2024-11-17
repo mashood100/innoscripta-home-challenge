@@ -110,6 +110,7 @@ class TaskCard extends ConsumerWidget {
             ],
           ),
           if (task.labels!.contains('in_progress')) ...[
+            Space.y1,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

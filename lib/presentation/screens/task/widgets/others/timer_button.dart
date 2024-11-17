@@ -22,23 +22,50 @@ class TimerButton extends ConsumerWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(
-          icon: Icon(isRunning ? Icons.pause : Icons.play_arrow),
-          onPressed: () {
-            final notifier = ref.read(timerProvider.notifier);
-            if (isRunning) {
-              notifier.pauseTimer(task.id!);
-            } else {
-              notifier.startTimer(task);
-            }
-          },
+        Container(
+          decoration: BoxDecoration(
+            color: isRunning 
+              ? Colors.orange.withOpacity(0.1)
+              : Colors.green.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: IconButton(
+            icon: Icon(
+              isRunning ? Icons.pause : Icons.play_arrow,
+              color: isRunning ? Colors.orange : Colors.green,
+            ),
+            onPressed: () {
+              final notifier = ref.read(timerProvider.notifier);
+              if (isRunning) {
+                notifier.pauseTimer(task.id!);
+              } else {
+                notifier.startTimer(task);
+              }
+            },
+          ),
         ),
-        Text(
-          formatDuration(currentDuration),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            formatDuration(currentDuration),
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        IconButton(
-          icon: const Icon(Icons.restart_alt),
-          onPressed: () => _showResetConfirmation(context, ref),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.red.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: IconButton(
+            icon: const Icon(
+              Icons.restart_alt,
+              color: Colors.red,
+            ),
+            onPressed: () => _showResetConfirmation(context, ref),
+          ),
         ),
       ],
     );
