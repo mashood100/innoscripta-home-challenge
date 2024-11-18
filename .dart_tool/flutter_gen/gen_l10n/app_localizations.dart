@@ -354,19 +354,19 @@ abstract class AppLocalizations {
   /// No description provided for @noTodoTasks.
   ///
   /// In en, this message translates to:
-  /// **'No todo tasks'**
+  /// **'Todo tasks'**
   String get noTodoTasks;
 
   /// No description provided for @noInProgressTasks.
   ///
   /// In en, this message translates to:
-  /// **'No in progress tasks'**
+  /// **'In progress tasks'**
   String get noInProgressTasks;
 
   /// No description provided for @noCompletedTasks.
   ///
   /// In en, this message translates to:
-  /// **'No completed tasks'**
+  /// **'Completed tasks'**
   String get noCompletedTasks;
 
   /// No description provided for @resetTimer.

@@ -4,9 +4,12 @@ import 'package:innoscripta_home_challenge/data/repository/task/tasks_repository
 import 'package:innoscripta_home_challenge/data/source/network/task/tasks_api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/domain/use_cases/task/tasks_use_cases.dart';
+import 'package:innoscripta_home_challenge/main.dart';
 import 'package:innoscripta_home_challenge/presentation/provider/task/task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 import 'dart:developer';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TaskStateNotifier extends StateNotifier<TaskState> {
   TaskStateNotifier({
@@ -182,6 +185,65 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       );
       SnackbarHelper.snackbarWithTextOnly('Failed to delete task');
       log('Delete task error: $e');
+    }
+  }
+
+//============================== Load Closed Tasks ==============================
+  Future<void> loadClosedTasks() async {
+    try {
+      state = state.copyWith(completedTaskStatus: CompletedTaskState.loading);
+      final prefs = await SharedPreferences.getInstance();
+      final closedTasksJson = prefs.getStringList('closed_tasks') ?? [];
+      final closedTasks = closedTasksJson.map((taskJson) {
+        String decodedString = jsonDecode(taskJson);
+        Map<String, dynamic> taskMap = jsonDecode(decodedString);
+
+        return Task.fromDto(TaskDto.fromMap(taskMap));
+      }).toList();
+
+      state = state.copyWith(
+        closedTasks: closedTasks,
+        completedTaskStatus: CompletedTaskState.success,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        completedTaskStatus: CompletedTaskState.initial,
+        errorMessage: e.toString(),
+      );
+    }
+  }
+
+//============================== Close Task ==============================
+  Future<void> closeTask(Task task) async {
+    try {
+      final updatedTask = task.copyWith(
+        labels: [...task.labels ?? [], 'closed'],
+      );
+
+      await _taskUseCase.close(updatedTask);
+
+      final updatedTasks = state.tasks.where((t) => t.id != task.id).toList();
+      final updatedClosedTasks = [...state.closedTasks, updatedTask];
+
+      final prefs = await SharedPreferences.getInstance();
+      final closedTasksJson =
+          updatedClosedTasks.map((task) => jsonEncode(task.toJson())).toList();
+      await prefs.setStringList('closed_tasks', closedTasksJson);
+
+      state = state.copyWith(
+        tasks: updatedTasks,
+        closedTasks: updatedClosedTasks,
+        completedTaskStatus: CompletedTaskState.success,
+      );
+
+      SnackbarHelper.snackbarWithTextOnly('Task closed successfully');
+    } catch (e) {
+      state = state.copyWith(
+        completedTaskStatus: CompletedTaskState.initial,
+        errorMessage: e.toString(),
+      );
+      SnackbarHelper.snackbarWithTextOnly('Failed to close task');
+      log('Close task error: $e');
     }
   }
 }

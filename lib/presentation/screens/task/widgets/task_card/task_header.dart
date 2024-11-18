@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app_typography.dart';
 
 class TaskHeader extends ConsumerWidget {
@@ -18,7 +19,6 @@ class TaskHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(themeProvider);
     return Padding(
       padding: EdgeInsets.only(top: 10.h),
       child: Row(
@@ -58,10 +58,9 @@ class TaskHeader extends ConsumerWidget {
             ),
           ),
           IconButton(
-            icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-            onPressed: () {
-              ref.read(themeProvider.notifier).toggleTheme();
-            },
+            icon: const Icon(Icons.history),
+            onPressed: () =>
+                context.pushNamed(AppRoute.taskHistory.name, extra: project),
           ),
         ],
       ),

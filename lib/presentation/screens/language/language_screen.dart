@@ -14,7 +14,7 @@ class LanguageScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Languages'),
+        title: const Text('Languages'),
       ),
       body: ListView.builder(
         itemCount: LanguageConfig.supportedLanguages.length,
@@ -30,9 +30,7 @@ class LanguageScreen extends ConsumerWidget {
                 : null,
             onTap: () {
               ref.read(languageProvider.notifier).state = language.code;
-              // Update the app's locale
               final newLocale = Locale(language.code, language.countryCode);
-              // You'll need to add this provider to your app's root
               ref.read(localeProvider.notifier).state = newLocale;
             },
           );

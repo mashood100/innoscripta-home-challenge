@@ -37,35 +37,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
     });
   }
 
-  void _onTaskMoved(Task task, String newStatus) {
-    ref.read(taskStateProvider.notifier).updateTaskStatus(task, newStatus);
-  }
-
-  Widget _buildTaskSection(
-      String title, List<Task> tasks, String status, bool isLoading) {
-    if (isLoading) {
-      return const TaskSectionShimmer();
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: Space.all(15),
-          child: Text(
-            '$title (${tasks.length})',
-            style: AppText.titleLarge,
-          ),
-        ),
-        TaskRow(
-          tasks: tasks,
-          status: status,
-          onTaskMoved: _onTaskMoved,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final taskState = ref.watch(taskStateProvider);
@@ -98,11 +69,20 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildTaskSection(AppLocalizations.of(context)!.noTodoTasks, todoTasks, 'todo', isLoading),
+                  _buildTaskSection(AppLocalizations.of(context)!.noTodoTasks,
+                      todoTasks, 'todo', isLoading),
                   Space.y2,
-                  _buildTaskSection(AppLocalizations.of(context)!.noInProgressTasks, inProgressTasks, 'in_progress', isLoading),
+                  _buildTaskSection(
+                      AppLocalizations.of(context)!.noInProgressTasks,
+                      inProgressTasks,
+                      'in_progress',
+                      isLoading),
                   Space.y2,
-                  _buildTaskSection(AppLocalizations.of(context)!.noCompletedTasks, completedTasks, 'completed', isLoading),
+                  _buildTaskSection(
+                      AppLocalizations.of(context)!.noCompletedTasks,
+                      completedTasks,
+                      'completed',
+                      isLoading),
                   Space.yf(150),
                 ],
               ),
@@ -120,5 +100,34 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Widget _buildTaskSection(
+      String title, List<Task> tasks, String status, bool isLoading) {
+    if (isLoading) {
+      return const TaskSectionShimmer();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: Space.all(15),
+          child: Text(
+            '$title (${tasks.length})',
+            style: AppText.titleLarge,
+          ),
+        ),
+        TaskRow(
+          tasks: tasks,
+          status: status,
+          onTaskMoved: _onTaskMoved,
+        ),
+      ],
+    );
+  }
+
+  void _onTaskMoved(Task task, String newStatus) {
+    ref.read(taskStateProvider.notifier).updateTaskStatus(task, newStatus);
   }
 }

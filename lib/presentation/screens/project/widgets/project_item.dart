@@ -15,14 +15,16 @@ class ProjectItem extends ConsumerWidget {
   const ProjectItem({
     super.key,
     required this.project,
+    required this.isPreview,
   });
-
+  final bool isPreview;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: Space.h.add(Space.v),
       child: InkWell(
         onTap: () {
+          if (isPreview) return;
           context.pushNamed(
             AppRoute.projectDetails.name,
             pathParameters: {'projectId': project.id.toString()},
@@ -48,12 +50,13 @@ class ProjectItem extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                      project.name ?? AppLocalizations.of(context)!.untitledProject,
+                        project.name ??
+                            AppLocalizations.of(context)!.untitledProject,
                         style: AppText.headlineMediumSemiBold.cl(Colors.white),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                       AppLocalizations.of(context)!.tapToViewTasks,
+                        AppLocalizations.of(context)!.tapToViewTasks,
                         style: AppText.bodySmall.cl(Colors.white),
                       ),
                     ],

@@ -8,4 +8,5 @@ enum AppRoute {
   createTask,
   comments,
   favorites,
+  taskHistory,
 }

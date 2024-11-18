@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/comment_card.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/comment_input_widget.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/update_comment_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CommentScreen extends ConsumerStatefulWidget {
   final String projectId;
@@ -22,14 +22,6 @@ class CommentScreen extends ConsumerStatefulWidget {
 }
 
 class _CommentScreenState extends ConsumerState<CommentScreen> {
-  final TextEditingController _commentController = TextEditingController();
-
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final commentState = ref.watch(commentStateProvider);
@@ -55,82 +47,13 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
               },
             ),
           ),
-          _buildCommentInput(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCommentInput() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            offset: const Offset(0, -1),
-            blurRadius: 4,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: Theme.of(context).dividerColor,
-                ),
-              ),
-              child: TextField(
-                controller: _commentController,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.addComment,
-                  hintStyle: TextStyle(
-                    color: Colors.grey[400],
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
-                  ),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-                maxLines: null,
-              ),
-            ),
-          ),
-          Space.x2,
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.send, color: Colors.white),
-              onPressed: _handleAddComment,
-            ),
+          CommentInputWidget(
+            projectId: widget.projectId,
+            taskId: widget.taskId,
           ),
         ],
       ),
     );
-  }
-
-  void _handleAddComment() {
-    if (_commentController.text.trim().isEmpty) return;
-
-    final comment = Comment(
-      content: _commentController.text,
-      projectId: widget.projectId,
-      taskId: widget.taskId,
-    );
-
-    ref.read(commentStateProvider.notifier).createComment(comment);
-    _commentController.clear();
   }
 
   void _handleDeleteComment(Comment comment) {

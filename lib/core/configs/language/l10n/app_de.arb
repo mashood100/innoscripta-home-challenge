@@ -65,5 +65,13 @@
     "noComments": "Noch keine Kommentare",
     "commentUpdated": "Kommentar erfolgreich aktualisiert",
     "commentDeleted": "Kommentar erfolgreich gelöscht",
-    "commentAdded": "Kommentar erfolgreich hinzugefügt"
+    "commentAdded": "Kommentar erfolgreich hinzugefügt",
+    "taskHistory": "Aufgabenverlauf",
+    "@taskHistory": {
+        "description": "Title for the task history screen"
+    },
+    "noClosedTasks": "Keine abgeschlossenen Aufgaben",
+    "@noClosedTasks": {
+        "description": "Message shown when there are no closed tasks in history"
+    }
 }

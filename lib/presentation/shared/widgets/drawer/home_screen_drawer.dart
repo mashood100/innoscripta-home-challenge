@@ -40,6 +40,14 @@ class HomeScreenDrawer extends ConsumerWidget {
               Navigator.pop(context); // Close drawer
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.history),
+            title: const Text('History'),
+            onTap: () {
+              context.pushNamed(AppRoute.taskHistory.name);
+              Navigator.pop(context); // Close drawer
+            },
+          ),
         ],
       ),
     );

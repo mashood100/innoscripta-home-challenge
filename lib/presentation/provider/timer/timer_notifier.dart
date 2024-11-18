@@ -192,3 +192,4 @@ class TimerNotifier extends StateNotifier<TimerState> {
     super.dispose();
   }
 }
+

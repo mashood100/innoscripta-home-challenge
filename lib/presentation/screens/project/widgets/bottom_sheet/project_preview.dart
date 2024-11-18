@@ -9,18 +9,22 @@ class ProjectPreview extends ConsumerWidget {
   final Project project;
 
   const ProjectPreview({
-    Key? key,
+    super.key,
     required this.project,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-       Text(AppLocalizations.of(context)!.projectPreviewLabel, style: AppText.bodyMedium),
+        Text(AppLocalizations.of(context)!.projectPreviewLabel,
+            style: AppText.bodyMedium),
         Space.y1,
-        ProjectItem(project: project),
+        ProjectItem(
+          project: project,
+          isPreview: true,
+        ),
       ],
     );
   }

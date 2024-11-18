@@ -33,11 +33,10 @@ class CommentStateNotifier extends StateNotifier<CommentState> {
       SnackbarHelper.snackbarWithTextOnly('Comment added successfully');
     } catch (error) {
       state = state.copyWith(
-        status: CommentProviderState.error,
+        status: CommentProviderState.initial,
         errorMessage: error.toString(),
       );
       SnackbarHelper.snackbarWithTextOnly('Failed to add comment');
-      log('Create comment error: $error');
     }
   }
 
@@ -109,7 +108,7 @@ class CommentStateNotifier extends StateNotifier<CommentState> {
       SnackbarHelper.snackbarWithTextOnly('Comment deleted successfully');
     } catch (e) {
       state = state.copyWith(
-        status: CommentProviderState.error,
+        status: CommentProviderState.initial,
         errorMessage: e.toString(),
       );
       SnackbarHelper.snackbarWithTextOnly('Failed to delete comment');

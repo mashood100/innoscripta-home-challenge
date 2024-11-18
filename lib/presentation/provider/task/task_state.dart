@@ -6,42 +6,56 @@ enum TaskProviderState {
   loading,
   success,
 }
-
+enum CompletedTaskState {
+  initial,
+  loading,
+  success,
+}
 class TaskState extends Equatable {
   final TaskProviderState status;
+  final CompletedTaskState completedTaskStatus;
   final List<Task> tasks;
-  final String errorMessage;
+  final List<Task> closedTasks;
   final Map<String, int> taskDurations;
+  final String? errorMessage;
 
   const TaskState({
     required this.status,
+    required this.completedTaskStatus,
     required this.tasks,
-    this.errorMessage = '',
-    this.taskDurations = const {},
+    required this.closedTasks,
+    required this.taskDurations,
+    this.errorMessage,
   });
 
   factory TaskState.initial() {
     return const TaskState(
       status: TaskProviderState.initial,
+      completedTaskStatus: CompletedTaskState.initial,
       tasks: [],
+      closedTasks: [],
       taskDurations: {},
     );
   }
 
   TaskState copyWith({
     TaskProviderState? status,
+    CompletedTaskState? completedTaskStatus,
     List<Task>? tasks,
-    String? errorMessage,
+    List<Task>? closedTasks,
     Map<String, int>? taskDurations,
+    String? errorMessage,
   }) {
     return TaskState(
       status: status ?? this.status,
+      completedTaskStatus: completedTaskStatus ?? this.completedTaskStatus,
       tasks: tasks ?? this.tasks,
-      errorMessage: errorMessage ?? this.errorMessage,
+      closedTasks: closedTasks ?? this.closedTasks,
       taskDurations: taskDurations ?? this.taskDurations,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [status, tasks, errorMessage, taskDurations];
+  List<Object?> get props => [status, completedTaskStatus, tasks, closedTasks, taskDurations, errorMessage];
 }

@@ -73,4 +73,16 @@ class TasksApiService extends ApiService {
       rethrow;
     }
   }
+
+  Future<void> close(Task task) async {
+    try {
+      final requestData = RequestData(
+        '/tasks/${task.id}/close',
+        RequestType.DELETE,
+      );
+      await makeRequest(requestData);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -147,13 +147,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteTaskConfirmation => 'Are you sure you want to delete this task?';
 
   @override
-  String get noTodoTasks => 'No todo tasks';
+  String get noTodoTasks => 'Todo tasks';
 
   @override
-  String get noInProgressTasks => 'No in progress tasks';
+  String get noInProgressTasks => 'In progress tasks';
 
   @override
-  String get noCompletedTasks => 'No completed tasks';
+  String get noCompletedTasks => 'Completed tasks';
 
   @override
   String get resetTimer => 'Reset Timer';

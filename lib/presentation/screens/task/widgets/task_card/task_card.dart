@@ -4,6 +4,7 @@ import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/task_details_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -119,6 +120,47 @@ class TaskCard extends ConsumerWidget {
                   builder: (context, ref, _) {
                     return TimerButton(
                       task: task,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+          if (task.labels!.contains('completed')) ...[
+            Space.y1,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Consumer(
+                  builder: (context, ref, _) {
+                    return Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: TextButton.icon(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        onPressed: () {
+                          ref.read(taskStateProvider.notifier).closeTask(task);
+                        },
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.green,
+                          size: 20.r,
+                        ),
+                        label: Text(
+                          "Mark as completed",
+                          style: AppText.labelMedium.copyWith(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ),
                     );
                   },
                 ),

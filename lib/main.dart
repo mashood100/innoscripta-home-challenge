@@ -34,7 +34,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp.router(
       routerConfig: goRouter,
       locale: locale,
-      title: 'innoscripta Task challenge',
+      title: 'Innoscripta Task challenge',
       theme: themeLight,
       darkTheme: themeDark,
       scaffoldMessengerKey: SnackbarHelper.scaffoldMessengerKey,
@@ -46,8 +46,8 @@ class _MyAppState extends ConsumerState<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en'), // English
-        Locale('de'), // German
+        Locale('en'),
+        Locale('de'),
       ],
     );
   }

@@ -50,6 +50,15 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
+  Future<void> close(Task task) async {
+    try {
+      await _api.close(task);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
   Future<Task> get(String id) async {
     try {
       final responseString = await _api.get(id);

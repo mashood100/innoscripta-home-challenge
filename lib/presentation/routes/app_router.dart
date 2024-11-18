@@ -10,6 +10,7 @@ import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/
 import 'package:innoscripta_home_challenge/presentation/screens/task/tasks_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/comment_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/task/task_history_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -72,6 +73,11 @@ final goRouter = GoRouter(
           path: 'favorites',
           name: AppRoute.favorites.name,
           builder: (context, state) => const FavoriteProjectsScreen(),
+        ),
+        GoRoute(
+          path: 'task-history',
+          name: AppRoute.taskHistory.name,
+          builder: (context, state) => const TaskHistoryScreen(),
         ),
       ],
     ),

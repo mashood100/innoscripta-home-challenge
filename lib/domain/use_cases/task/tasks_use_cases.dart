@@ -32,6 +32,14 @@ class TasksUseCases {
     }
   }
 
+  Future<void> close(Task task) async {
+    try {
+      return await _repository.delete(task);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Task> get(String id) async {
     try {
       return await _repository.get(id);

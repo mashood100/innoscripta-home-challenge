@@ -49,7 +49,10 @@ class ProjectList extends ConsumerWidget {
               ),
             ],
           ),
-          child: ProjectItem(project: projects[index]),
+          child: ProjectItem(
+            project: projects[index],
+            isPreview: false,
+          ),
         ),
         childCount: projects.length,
       ),
@@ -69,12 +72,12 @@ class ProjectList extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title:  Text(AppLocalizations.of(context)!.deleteProject),
-        content:  Text(AppLocalizations.of(context)!.deleteProjectConfirmation),
+        title: Text(AppLocalizations.of(context)!.deleteProject),
+        content: Text(AppLocalizations.of(context)!.deleteProjectConfirmation),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child:  Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
