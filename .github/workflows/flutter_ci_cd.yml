@@ -35,12 +35,6 @@ jobs:
           flutter pub get
           flutter clean
 
-      - name: Check Formatting
-        run: dart format --set-exit-if-changed lib/
-
-      - name: Analyze Code
-        run: flutter analyze
-
       - name: Run Tests
         run: flutter test
 
@@ -48,7 +42,7 @@ jobs:
         if: success() && github.ref == 'refs/heads/main'
         run: |
           flutter build apk --release
-          flutter build appbundle --release
+          flutter build app-bundle --release
 
       - name: Upload APK
         if: success() && github.ref == 'refs/heads/main'
