@@ -1,4 +1,5 @@
 enum AppRoute {
+  splash,
   projects,
   languages,
   settings,

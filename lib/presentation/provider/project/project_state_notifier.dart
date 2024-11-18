@@ -9,44 +9,46 @@ import 'package:innoscripta_home_challenge/presentation/provider/project/project
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 
 class ProjectStateNotifier extends StateNotifier<ProjectState> {
-  ProjectStateNotifier()  : _projectUseCase = ProjectsUseCases(
+  ProjectStateNotifier()
+      : _projectUseCase = ProjectsUseCases(
           repository: ProjectsRepositoryImpl(api: ProjectsApiService()),
         ),
         super(ProjectState.initial());
 
   final ProjectsUseCases _projectUseCase;
 
+//============================== Create Project ==============================
+  /// Creates a new project and adds it to the top of the projects list
   Future<void> createProject(Project project) async {
     try {
-      // state = state.copyWith(
-      //   status: ProjectProviderState.initial,
-      // );
       Project response = await _projectUseCase.create(project);
 
-      // Add new project at the top of the list
       final updatedProjects = [response, ...state.projects];
       state = state.copyWith(
         projects: updatedProjects,
-        // status: ProjectProviderState.initial,
       );
 
       SnackbarHelper.snackbarWithTextOnly('Project created successfully');
     } catch (error) {
-      // state = state.copyWith(
-      //   status: ProjectProviderState.initial,
-      // );
       SnackbarHelper.snackbarWithTextOnly('Failed to create new project');
       log('Create project error: $error');
     }
   }
+//============================== All Projects ==============================
+  /// Fetches all projects from the API and filters out the default project
 
   Future<void> getAllProjects() async {
     try {
       state = state.copyWith(status: ProjectProviderState.loading);
       final projects = await _projectUseCase.getAll();
+
+      // Filter out default project
+      final filteredProjects =
+          projects.where((p) => p.id != "2343546180").toList();
+
       state = state.copyWith(
         status: ProjectProviderState.success,
-        projects: projects,
+        projects: filteredProjects,
       );
     } catch (e) {
       state = state.copyWith(
@@ -55,12 +57,13 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
       );
     }
   }
+//============================== Delete Projects ==============================
 
+  /// Removes a project from the list by its ID
   Future<void> deleteProject(String? projectId) async {
     try {
       await _projectUseCase.delete(projectId);
 
-      // Remove the project from the list
       final updatedProjects =
           state.projects.where((p) => p.id != projectId).toList();
       state = state.copyWith(
@@ -79,6 +82,9 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
     }
   }
 
+//============================== Update Projects ==============================
+
+  /// Updates an existing project's details with optimistic update pattern
   Future<void> updateProject(Project project) async {
     final initialState = state;
 

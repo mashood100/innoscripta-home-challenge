@@ -1,4 +1,4 @@
-#Mon Nov 18 02:13:51 PKT 2024
+#Tue Nov 19 00:15:59 PKT 2024
 base.0=/Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

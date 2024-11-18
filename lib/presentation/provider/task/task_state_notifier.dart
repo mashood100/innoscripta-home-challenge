@@ -23,6 +23,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   final TaskStorageUseCases _taskStorageUseCases;
 
 //============================== Create Task ==============================
+  /// Creates a new task and adds it to the tasks list with duration tracking
   Future<void> createTask(
     Task newtask,
   ) async {
@@ -53,6 +54,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Get All Task ==============================
+  /// Fetches all tasks for a specific project and initializes their durations
   Future<void> getAllTasks(String projectId) async {
     try {
       state = state.copyWith(status: TaskProviderState.loading);
@@ -77,6 +79,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Update Status==============================
+  /// Updates the task's status label (todo, in_progress, completed)
   Future<void> updateTaskStatus(Task task, String newStatus) async {
     try {
       final currentLabels = task.labels!
@@ -106,6 +109,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Update Task ==============================
+  /// Updates an existing task's details in the task list
   Future<void> updateTask(Task task) async {
     try {
       final taskIndex = state.tasks.indexWhere((t) => t.id == task.id);
@@ -127,6 +131,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Update Duration ==============================
+  /// Updates the time duration spent on a specific task
   Future<void> updateTaskDuration(String taskId, int seconds) async {
     try {
       final updatedTasks = state.tasks.map((task) {
@@ -157,11 +162,13 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Clear Task ==============================
+  /// Clears all tasks from the state
   void clearTasks() {
     state = state.copyWith(tasks: []);
   }
 
 //============================== Delete Task ==============================
+  /// Removes a task from the list and updates the duration tracking
   Future<void> deleteTask(Task task) async {
     final initialState = state;
 
@@ -189,6 +196,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Load Closed Tasks ==============================
+  /// Loads previously closed tasks from local storage
   Future<void> loadClosedTasks() async {
     try {
       state = state.copyWith(completedTaskStatus: CompletedTaskState.loading);
@@ -207,6 +215,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   }
 
 //============================== Close Task ==============================
+  /// Marks a task as closed and moves it to the closed tasks list
   Future<void> closeTask(Task task) async {
     try {
       final updatedTask = task.copyWith(

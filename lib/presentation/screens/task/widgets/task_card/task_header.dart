@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/app_typography.dart';
@@ -45,14 +44,6 @@ class TaskHeader extends ConsumerWidget {
                       ),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 12.r, left: 10.r),
-                  child: CircleAvatar(
-                    radius: 8.r,
-                    backgroundColor:
-                        ColorUtility.getColorFromString(project.color!),
-                  ),
                 ),
               ],
             ),

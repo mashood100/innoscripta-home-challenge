@@ -11,15 +11,21 @@ import 'package:innoscripta_home_challenge/presentation/screens/task/tasks_scree
 import 'package:innoscripta_home_challenge/presentation/screens/task/create_task_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/comment_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/task_history_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/screens/splash_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final goRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/',
+  initialLocation: '/splash',
   routes: [
     GoRoute(
-      path: '/',
+      path: '/splash',
+      name: AppRoute.splash.name,
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/projects',
       name: AppRoute.projects.name,
       builder: (context, state) => const ProjectScreen(),
       routes: [

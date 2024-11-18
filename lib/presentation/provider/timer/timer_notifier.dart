@@ -17,6 +17,8 @@ class TimerNotifier extends StateNotifier<TimerState> {
     _restoreState();
   }
 
+//============================== Task Duration Management ==============================
+  /// Updates the duration of a task in minutes based on elapsed seconds
   Future<void> updateTaskDuration(String taskId, int seconds) async {
     try {
       final taskNotifier = _ref.read(taskStateProvider.notifier);
@@ -31,6 +33,8 @@ class TimerNotifier extends StateNotifier<TimerState> {
     }
   }
 
+//============================== Timer Controls ==============================
+  /// Starts or resumes a timer for a specific task
   void startTimer(Task task) {
     final taskId = task.id!;
     final existingTimer = state.taskTimers[taskId];
@@ -62,6 +66,7 @@ class TimerNotifier extends StateNotifier<TimerState> {
     });
   }
 
+  /// Pauses the timer for a specific task and saves its state
   void pauseTimer(String taskId) {
     _timers[taskId]?.cancel();
     _timers.remove(taskId);
@@ -76,6 +81,7 @@ class TimerNotifier extends StateNotifier<TimerState> {
     }
   }
 
+  /// Resets the timer and clears stored data for a specific task
   void resetTimer(String taskId) {
     _timers[taskId]?.cancel();
     _timers.remove(taskId);
@@ -91,25 +97,32 @@ class TimerNotifier extends StateNotifier<TimerState> {
     updateTaskDuration(taskId, 0);
   }
 
+//============================== Timer State Queries ==============================
+  /// Checks if a timer is currently running for a specific task
   bool isTimerRunning(String taskId) {
     final timer = state.taskTimers[taskId];
     return timer != null && !timer.isPaused;
   }
 
+  /// Checks if a timer is paused for a specific task
   bool isTimerPaused(String taskId) {
     final timer = state.taskTimers[taskId];
     return timer?.isPaused ?? false;
   }
 
+  /// Gets the current duration in seconds for a specific task
   int getCurrentDuration(String taskId) {
     return state.taskTimers[taskId]?.currentDuration ?? 0;
   }
 
+  /// Formats seconds into HH:MM:SS string format
   String getFormattedDuration(int seconds) {
     final duration = Duration(seconds: seconds);
     return '${duration.inHours}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
+//============================== State Persistence ==============================
+  /// Saves the current state of all timers to local storage
   Future<void> _saveState() async {
     for (final entry in state.taskTimers.entries) {
       final taskId = entry.key;
@@ -133,6 +146,7 @@ class TimerNotifier extends StateNotifier<TimerState> {
     }
   }
 
+  /// Restores timer states from local storage on initialization
   Future<void> _restoreState() async {
     final tasks = _ref.read(taskStateProvider).tasks;
     final updatedTimers = <String, TaskTimer>{};
@@ -167,7 +181,7 @@ class TimerNotifier extends StateNotifier<TimerState> {
     state = TimerState(taskTimers: updatedTimers);
   }
 
-  // Extract timer creation logic to avoid duplication
+  /// Creates and starts a periodic timer for a specific task
   void _startPeriodicTimer(String taskId) {
     _timers[taskId] = Timer.periodic(const Duration(seconds: 1), (_) {
       final currentTimer = state.taskTimers[taskId]!;
@@ -180,10 +194,13 @@ class TimerNotifier extends StateNotifier<TimerState> {
     });
   }
 
+  /// Retrieves stored duration for a specific task
   Future<int> getTaskDuration(String taskId) async {
     return localStorage.getInt('task_duration_$taskId') ?? 0;
   }
 
+//============================== Cleanup ==============================
+  /// Cancels all active timers when the notifier is disposed
   @override
   void dispose() {
     _timers.forEach((taskId, timer) {
