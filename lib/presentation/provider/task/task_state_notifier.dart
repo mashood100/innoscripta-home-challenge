@@ -4,24 +4,24 @@ import 'package:innoscripta_home_challenge/data/repository/task/tasks_repository
 import 'package:innoscripta_home_challenge/data/source/network/task/tasks_api_service.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/domain/use_cases/task/tasks_use_cases.dart';
-import 'package:innoscripta_home_challenge/main.dart';
 import 'package:innoscripta_home_challenge/presentation/provider/task/task_state.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 import 'dart:developer';
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:innoscripta_home_challenge/domain/use_cases/task/task_storage_use_cases.dart';
 
 class TaskStateNotifier extends StateNotifier<TaskState> {
   TaskStateNotifier({
-    required Ref ref,
-  })  : _ref = ref,
-        _taskUseCase = TasksUseCases(
+
+    required TaskStorageUseCases taskStorageUseCases,
+  })  : _taskUseCase = TasksUseCases(
           repository: TasksRepositoryImpl(api: TasksApiService()),
         ),
+        _taskStorageUseCases = taskStorageUseCases,
         super(TaskState.initial());
 
-  final Ref _ref;
   final TasksUseCases _taskUseCase;
+  final TaskStorageUseCases _taskStorageUseCases;
+
 //============================== Create Task ==============================
   Future<void> createTask(
     Task newtask,
@@ -192,14 +192,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
   Future<void> loadClosedTasks() async {
     try {
       state = state.copyWith(completedTaskStatus: CompletedTaskState.loading);
-      final prefs = await SharedPreferences.getInstance();
-      final closedTasksJson = prefs.getStringList('closed_tasks') ?? [];
-      final closedTasks = closedTasksJson.map((taskJson) {
-        String decodedString = jsonDecode(taskJson);
-        Map<String, dynamic> taskMap = jsonDecode(decodedString);
-
-        return Task.fromDto(TaskDto.fromMap(taskMap));
-      }).toList();
+      final closedTasks = await _taskStorageUseCases.getClosedTasks();
 
       state = state.copyWith(
         closedTasks: closedTasks,
@@ -225,10 +218,7 @@ class TaskStateNotifier extends StateNotifier<TaskState> {
       final updatedTasks = state.tasks.where((t) => t.id != task.id).toList();
       final updatedClosedTasks = [...state.closedTasks, updatedTask];
 
-      final prefs = await SharedPreferences.getInstance();
-      final closedTasksJson =
-          updatedClosedTasks.map((task) => jsonEncode(task.toJson())).toList();
-      await prefs.setStringList('closed_tasks', closedTasksJson);
+      await _taskStorageUseCases.saveClosedTasks(updatedClosedTasks);
 
       state = state.copyWith(
         tasks: updatedTasks,

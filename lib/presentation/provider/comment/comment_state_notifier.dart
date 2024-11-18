@@ -8,15 +8,13 @@ import 'package:innoscripta_home_challenge/presentation/provider/comment/comment
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 
 class CommentStateNotifier extends StateNotifier<CommentState> {
-  CommentStateNotifier({
-    required Ref ref,
-  })  : _ref = ref,
+  CommentStateNotifier()  : 
         _commentUseCase = CommentsUseCases(
           repository: CommentsRepositoryImpl(api: CommentsApiService()),
         ),
         super(CommentState.initial());
 
-  final Ref _ref;
+
   final CommentsUseCases _commentUseCase;
 
   Future<void> createComment(Comment comment) async {

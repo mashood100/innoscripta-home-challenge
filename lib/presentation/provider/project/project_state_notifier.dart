@@ -9,15 +9,11 @@ import 'package:innoscripta_home_challenge/presentation/provider/project/project
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 
 class ProjectStateNotifier extends StateNotifier<ProjectState> {
-  ProjectStateNotifier({
-    required Ref ref,
-  })  : _ref = ref,
-        _projectUseCase = ProjectsUseCases(
+  ProjectStateNotifier()  : _projectUseCase = ProjectsUseCases(
           repository: ProjectsRepositoryImpl(api: ProjectsApiService()),
         ),
         super(ProjectState.initial());
 
-  final Ref _ref;
   final ProjectsUseCases _projectUseCase;
 
   Future<void> createProject(Project project) async {
@@ -103,5 +99,4 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
       log('Update project error: $e');
     }
   }
-
 }
