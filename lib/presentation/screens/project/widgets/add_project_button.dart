@@ -15,7 +15,6 @@ class AddProjectButton extends ConsumerWidget {
           builder: (context) => const AddProjectBottomSheet(),
         );
       },
-      tooltip: 'Create New Project',
       child: const Icon(Icons.add),
     );
   }

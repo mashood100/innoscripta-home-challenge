@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SheetHeader extends StatelessWidget {
   final bool isEditing;
@@ -25,7 +26,7 @@ class SheetHeader extends StatelessWidget {
         ),
         Space.y1,
         Text(
-          isEditing ? 'Edit Project' : 'Create New Project',
+          isEditing ? AppLocalizations.of(context)!.editProject  : AppLocalizations.of(context)!.createProject,
           style: AppText.headlineSmallBold,
           textAlign: TextAlign.center,
         ),

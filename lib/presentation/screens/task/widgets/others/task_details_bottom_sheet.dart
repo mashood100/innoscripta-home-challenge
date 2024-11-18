@@ -7,6 +7,7 @@ import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskDetailsBottomSheet extends ConsumerWidget {
   final Task task;
@@ -74,7 +75,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
         children: [
           Expanded(
             child: Text(
-              task.content ?? 'Untitled Task',
+              task.content ?? AppLocalizations.of(context)!.untitledTask,
               style: AppText.titleLarge.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -105,7 +106,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Description', style: AppText.titleMediumSemiBold),
+              Text(AppLocalizations.of(context)!.description, style: AppText.titleMediumSemiBold),
               Space.y1,
               Container(
                 width: double.infinity,
@@ -128,13 +129,13 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
         ),
 
         // Priority Section
-        Text('Priority:', style: AppText.titleMediumSemiBold),
+        Text('${AppLocalizations.of(context)!.priority}:', style: AppText.titleMediumSemiBold),
         Space.y1,
         _buildPriorityChip(context),
         Space.y2,
 
         // Task Details Section
-        Text('Task Details', style: AppText.titleMediumSemiBold),
+        Text(AppLocalizations.of(context)!.taskDetails, style: AppText.titleMediumSemiBold),
         Space.y1,
         Container(
           padding: const EdgeInsets.all(12),
@@ -144,10 +145,9 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
           ),
           child: Column(
             children: [
-              _buildDetailRow('Task ID', task.id ?? 'N/A'),
+              _buildDetailRow(AppLocalizations.of(context)!.taskId, task.id ?? 'N/A'),
               const Divider(height: 16),
-              _buildDetailRow(
-                  'Created', AppDateUtils.formatDate(task.createdAt)),
+              _buildDetailRow(AppLocalizations.of(context)!.created, AppDateUtils.formatDate(task.createdAt)),
               if (task.due != null) ...[
                 const Divider(height: 16),
                 _buildDetailRow('Due Date', task.due.toString()),
@@ -158,10 +158,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
                   final timerState = ref.watch(timerProvider);
                   final taskTimer = timerState.taskTimers[task.id];
                   final currentDuration = taskTimer?.currentDuration ?? 0;
-                  return _buildDetailRow(
-                    'Time Spent',
-                    _formatDuration(currentDuration),
-                  );
+                  return _buildDetailRow(AppLocalizations.of(context)!.timeSpent, _formatDuration(currentDuration));
                 },
               ),
             ],
@@ -172,7 +169,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
         // Timer Section (existing code)
         if (task.labels!.contains('in_progress')) ...[
           Space.y2,
-          Text('Timer', style: AppText.titleMediumSemiBold),
+          Text(AppLocalizations.of(context)!.timer, style: AppText.titleMediumSemiBold),
           Space.y1,
           Center(child: TimerButton(task: task)),
         ],
@@ -310,7 +307,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
                 );
               },
               icon: const Icon(Icons.comment),
-              label: const Text('View Comments'),
+              label: Text(AppLocalizations.of(context)!.viewComments),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
                 foregroundColor: Colors.white,
@@ -330,12 +327,12 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Task'),
-        content: const Text('Are you sure you want to delete this task?'),
+        title: Text(AppLocalizations.of(context)!.deleteTask),
+        content: Text(AppLocalizations.of(context)!.deleteTaskConfirmation),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -346,7 +343,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
               }
             },
             child: Text(
-              'Delete',
+              AppLocalizations.of(context)!.delete,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),

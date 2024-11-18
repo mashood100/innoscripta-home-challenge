@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SubmitButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isEditing;
 
   const SubmitButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.isEditing,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      // style: ElevatedButton.styleFrom(
-      //   backgroundColor: Theme.of(context).primaryColor,
-      //   foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      // ),
       child: Text(
-        isEditing ? 'Update Project' : 'Create Project',
+        isEditing
+            ? AppLocalizations.of(context)!.updateProject
+            : AppLocalizations.of(context)!.createNewProject,
       ),
     );
   }

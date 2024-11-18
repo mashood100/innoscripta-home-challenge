@@ -9,6 +9,7 @@ import 'project_name_input.dart';
 import 'project_preview.dart';
 import 'sheet_header.dart';
 import 'submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddProjectBottomSheet extends ConsumerStatefulWidget {
   final Project? project;
@@ -77,14 +78,14 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('Give your project a name:',
+                    Text(AppLocalizations.of(context)!.giveProjectName,
                         style: AppText.bodyMedium),
                     Space.y1,
                     ProjectNameInput(
                       controller: _titleController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a title';
+                       return AppLocalizations.of(context)!.pleaseEnterTitle;
                         }
                         return null;
                       },
@@ -104,7 +105,7 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
                       project: Project(
                         id: widget.project?.id,
                         name: _titleController.text.isEmpty
-                            ? 'Untitled Project'
+                            ? AppLocalizations.of(context)!.untitledProject
                             : _titleController.text,
                         color: _selectedColor,
                         isFavorite: widget.project?.isFavorite ?? false,

@@ -1,0 +1,15 @@
+com.example.innoscripta_home_challenge.app-jetified-datastore-1.0.0-0 /Users/mashoodhussain/.gradle/caches/transforms-3/1140b474b4d25829c7f5735c688d4983/transformed/jetified-datastore-1.0.0/res
+com.example.innoscripta_home_challenge.app-jetified-window-java-1.0.0-beta04-1 /Users/mashoodhussain/.gradle/caches/transforms-3/40f847a942d192deaf9c20f367dd17fd/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.innoscripta_home_challenge.app-core-1.6.0-2 /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/res
+com.example.innoscripta_home_challenge.app-jetified-annotation-experimental-1.1.0-3 /Users/mashoodhussain/.gradle/caches/transforms-3/8ef4fc66a1e8058e14f7cbd6bf253b2c/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.innoscripta_home_challenge.app-jetified-window-1.0.0-beta04-4 /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/res
+com.example.innoscripta_home_challenge.app-jetified-datastore-preferences-1.0.0-5 /Users/mashoodhussain/.gradle/caches/transforms-3/d3167875bcc40ea05e63b158c9da3bad/transformed/jetified-datastore-preferences-1.0.0/res
+com.example.innoscripta_home_challenge.app-main-6 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/res
+com.example.innoscripta_home_challenge.app-release-7 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/release/res
+com.example.innoscripta_home_challenge.app-pngs-8 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/generated/res/pngs/release
+com.example.innoscripta_home_challenge.app-resValues-9 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/generated/res/resValues/release
+com.example.innoscripta_home_challenge.app-rs-10 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/generated/res/rs/release
+com.example.innoscripta_home_challenge.app-mergeReleaseResources-11 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.example.innoscripta_home_challenge.app-mergeReleaseResources-12 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.example.innoscripta_home_challenge.app-merged_res-13 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/app/intermediates/merged_res/release
+com.example.innoscripta_home_challenge.app-packaged_res-14 /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/shared_preferences_android/intermediates/packaged_res/release

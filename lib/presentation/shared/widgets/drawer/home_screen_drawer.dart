@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 
 class HomeScreenDrawer extends ConsumerWidget {
   const HomeScreenDrawer({super.key});
@@ -8,36 +9,39 @@ class HomeScreenDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
-        child: ListView(
-      padding: EdgeInsets.zero,
-      children: [
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-          ),
-          child: const Text(
-            'Menu',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: const Text(
+              'Menu',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
             ),
           ),
-        ),
-        ListTile(
-          leading: const Icon(Icons.home),
-          title: const Text('Languages'),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.settings),
-          title: const Text('Settings'),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-      ],
-    ));
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text('Languages'),
+            onTap: () {
+              context.goNamed(AppRoute.languages.name);
+              Navigator.pop(context); // Close drawer
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.favorite),
+            title: const Text('Favorites'),
+            onTap: () {
+              context.goNamed(AppRoute.favorites.name);
+              Navigator.pop(context); // Close drawer
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -9,6 +9,7 @@ import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_list.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/shimmer/project_shimmer.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/empty_project_state.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectScreen extends ConsumerStatefulWidget {
   const ProjectScreen({super.key});
@@ -46,7 +47,7 @@ class _ProjectScreenState extends ConsumerState<ProjectScreen> {
             slivers: [
               SliverAppBar(
                 floating: true,
-                title: const Text('Projects'),
+                title: Text(AppLocalizations.of(context)!.projectTitle),
                 actions: [
                   IconButton(
                     icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),

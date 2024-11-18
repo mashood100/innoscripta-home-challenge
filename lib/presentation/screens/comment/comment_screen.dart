@@ -5,6 +5,7 @@ import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/update_comment_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CommentScreen extends ConsumerStatefulWidget {
   final String projectId;
@@ -46,8 +47,10 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
               itemBuilder: (context, index) {
                 return CommentCard(
                   comment: commentState.comments[index],
-                  onDelete: () => _handleDeleteComment(commentState.comments[index]),
-                  onUpdate: () => _showUpdateCommentSheet(commentState.comments[index]),
+                  onDelete: () =>
+                      _handleDeleteComment(commentState.comments[index]),
+                  onUpdate: () =>
+                      _showUpdateCommentSheet(commentState.comments[index]),
                 );
               },
             ),
@@ -85,7 +88,7 @@ class _CommentScreenState extends ConsumerState<CommentScreen> {
               child: TextField(
                 controller: _commentController,
                 decoration: InputDecoration(
-                  hintText: 'Add a comment...',
+                  hintText: AppLocalizations.of(context)!.addComment,
                   hintStyle: TextStyle(
                     color: Colors.grey[400],
                   ),

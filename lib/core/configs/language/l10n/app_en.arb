@@ -1,0 +1,83 @@
+{
+    "helloWorld": "Hello World",
+    "welcome": "Welcome to {appName}",
+    "@welcome": {
+        "placeholders": {
+            "appName": {
+                "type": "String"
+            }
+        }
+    },
+    "itemCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+    "@itemCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "projectScreenTitle": "Project",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteProject": "Delete Project",
+    "deleteProjectConfirmation": "Are you sure you want to delete this project?",
+    "cancel": "Cancel",
+    "untitledProject": "Untitled Project",
+    "tapToViewTasks": "Tap to view task in this project",
+    "giveProjectName": "Give your project a name:",
+    "pleaseEnterTitle": "Please enter a title",
+    "noProjectsFound": "No Projects Found",
+    "createProjectToStart": "Create a new project to get started",
+    "projectTitle": "Project Title",
+    "enterProjectName": "Enter project name",
+    "projectPreviewLabel": "How it will look:",
+    "editProject": "Edit Project",
+    "createNewProject": "Create New Project",
+    "updateProject": "Update Project",
+    "createProject": "Create Project",
+    "favoriteProjects": "Favorite Projects",
+    "noFavoriteProjects": "No favorite projects yet",
+    "createNewProjectTooltip": "Create New Project",
+    "createNewTask": "Create New Task",
+    "editTask": "Edit Task",
+    "taskTitle": "Task Title",
+    "enterTaskTitle": "Enter task title",
+    "description": "Description",
+    "enterTaskDescription": "Enter task description",
+    "priority": "Priority",
+    "normal": "Normal",
+    "medium": "Medium",
+    "high": "High",
+    "urgent": "Urgent",
+    "dueDate": "Due Date",
+    "selectDueDate": "Select due date",
+    "status": "Status:",
+    "createTask": "Create Task",
+    "updateTask": "Update Task",
+    "deleteTask": "Delete Task",
+    "deleteTaskConfirmation": "Are you sure you want to delete this task?",
+    "noTodoTasks": "No todo tasks",
+    "noInProgressTasks": "No in progress tasks",
+    "noCompletedTasks": "No completed tasks",
+    "resetTimer": "Reset Timer",
+    "resetTimerConfirmation": "Are you sure you want to reset the timer? You will lose your progress.",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "untitledTask": "Untitled Task",
+    "taskDetails": "Task Details",
+    "taskId": "Task ID",
+    "created": "Created",
+    "timeSpent": "Time Spent",
+    "timer": "Timer",
+    "comments": "Comments",
+    "viewComments": "View Comments",
+    "addComment": "Add a comment...",
+    "updateComment": "Update Comment",
+    "editComment": "Edit Comment",
+    "deleteComment": "Delete Comment",
+    "deleteCommentConfirmation": "Are you sure you want to delete this comment?",
+    "noComments": "No comments yet",
+    "commentUpdated": "Comment updated successfully",
+    "commentDeleted": "Comment deleted successfully",
+    "commentAdded": "Comment added successfully"
+}

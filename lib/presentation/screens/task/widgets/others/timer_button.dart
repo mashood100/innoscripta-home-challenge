@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TimerButton extends ConsumerWidget {
   final Task task;
@@ -76,19 +77,19 @@ class TimerButton extends ConsumerWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Reset Timer'),
-          content: const Text('Are you sure you want to reset the timer? You will lose your progress.'),
+          title: Text(AppLocalizations.of(context)!.resetTimer),
+          content: Text(AppLocalizations.of(context)!.resetTimerConfirmation),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             TextButton(
               onPressed: () {
                 ref.read(timerProvider.notifier).resetTimer(task.id!);
                 Navigator.of(context).pop();
               },
-              child: const Text('Reset'),
+              child: Text(AppLocalizations.of(context)!.reset),
             ),
           ],
         );

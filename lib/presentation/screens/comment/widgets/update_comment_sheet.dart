@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateCommentSheet extends ConsumerStatefulWidget {
   final Comment comment;
@@ -43,7 +44,8 @@ class _UpdateCommentSheetState extends ConsumerState<UpdateCommentSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Update Comment', style: AppText.titleLarge),
+          Text(AppLocalizations.of(context)!.updateComment,
+              style: AppText.titleLarge),
           Space.y2,
           TextField(
             controller: _controller,

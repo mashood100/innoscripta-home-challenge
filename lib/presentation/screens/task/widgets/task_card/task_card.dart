@@ -6,6 +6,7 @@ import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/oth
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskCard extends ConsumerWidget {
   final Task task;
@@ -76,7 +77,7 @@ class TaskCard extends ConsumerWidget {
               Space.x,
               Expanded(
                 child: Text(
-                  task.content ?? 'Untitled Task',
+                  task.content ?? AppLocalizations.of(context)!.untitledTask,
                   style: AppText.titleMediumBold,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -101,7 +102,7 @@ class TaskCard extends ConsumerWidget {
           Row(
             children: [
               Text(
-                "Priority: ",
+                "${AppLocalizations.of(context)!.priority}: ",
                 style: AppText.labelMediumSemiBold,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

@@ -1,0 +1,182 @@
+-- Merging decision tree log ---
+application
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:3:5-34:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mashoodhussain/.gradle/caches/transforms-3/ed90f7bc72cf4e3b5d2dbbc59f0d3445/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mashoodhussain/.gradle/caches/transforms-3/ed90f7bc72cf4e3b5d2dbbc59f0d3445/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:4:9-51
+	android:icon
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:6:9-43
+	android:name
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:5:9-42
+manifest
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+MERGED from [:shared_preferences_android] /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/d3167875bcc40ea05e63b158c9da3bad/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1140b474b4d25829c7f5735c688d4983/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/40f847a942d192deaf9c20f367dd17fd/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1ca675382c4fcf89370f4306501b46d2/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/67ed6a01e3c08b731286ba3bae7d00c1/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/b2003c2efcc9dd2c64e51de479d2e428/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/7811c3c08e8ad27e98813c3eacbe1b72/transformed/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/054f6da5a6b94ff6880f869fd9e84bbe/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f9f91d28a8344d70563e3967a4a42ec3/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/54f996c2ae55b238ab4ccacdacfe9703/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/0724a1f87957fa3eebbea2ed938a1e6c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/11676568af28b67c867a9768445cb78e/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/2ed453ec0d61eb6ce917ba1b581ba2de/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/01b390609134962e0734ab45c73ca1d4/transformed/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mashoodhussain/.gradle/caches/transforms-3/ed90f7bc72cf4e3b5d2dbbc59f0d3445/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f3dcf58b3a7e09b0775661b13a61459c/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/8ef4fc66a1e8058e14f7cbd6bf253b2c/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+	package
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:1-46:12
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:2:5-67
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:2:22-64
+queries
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:40:5-45:15
+intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:41:9-44:18
+action#android.intent.action.PROCESS_TEXT
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:42:13-72
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:42:21-70
+data
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:43:13-50
+	android:mimeType
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:43:19-48
+uses-sdk
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+MERGED from [:shared_preferences_android] /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/build/shared_preferences_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/d3167875bcc40ea05e63b158c9da3bad/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/d3167875bcc40ea05e63b158c9da3bad/transformed/jetified-datastore-preferences-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1140b474b4d25829c7f5735c688d4983/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1140b474b4d25829c7f5735c688d4983/transformed/jetified-datastore-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/40f847a942d192deaf9c20f367dd17fd/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/40f847a942d192deaf9c20f367dd17fd/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1ca675382c4fcf89370f4306501b46d2/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/1ca675382c4fcf89370f4306501b46d2/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/67ed6a01e3c08b731286ba3bae7d00c1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/67ed6a01e3c08b731286ba3bae7d00c1/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/b2003c2efcc9dd2c64e51de479d2e428/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/b2003c2efcc9dd2c64e51de479d2e428/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/7811c3c08e8ad27e98813c3eacbe1b72/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/7811c3c08e8ad27e98813c3eacbe1b72/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/054f6da5a6b94ff6880f869fd9e84bbe/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/054f6da5a6b94ff6880f869fd9e84bbe/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] /Users/mashoodhussain/.gradle/caches/transforms-3/74a58357aaf644713678aa40f27417cb/transformed/core-1.6.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f9f91d28a8344d70563e3967a4a42ec3/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f9f91d28a8344d70563e3967a4a42ec3/transformed/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/54f996c2ae55b238ab4ccacdacfe9703/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/54f996c2ae55b238ab4ccacdacfe9703/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/0724a1f87957fa3eebbea2ed938a1e6c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/0724a1f87957fa3eebbea2ed938a1e6c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/11676568af28b67c867a9768445cb78e/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/11676568af28b67c867a9768445cb78e/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/2ed453ec0d61eb6ce917ba1b581ba2de/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/2ed453ec0d61eb6ce917ba1b581ba2de/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/01b390609134962e0734ab45c73ca1d4/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/mashoodhussain/.gradle/caches/transforms-3/01b390609134962e0734ab45c73ca1d4/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mashoodhussain/.gradle/caches/transforms-3/ed90f7bc72cf4e3b5d2dbbc59f0d3445/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mashoodhussain/.gradle/caches/transforms-3/ed90f7bc72cf4e3b5d2dbbc59f0d3445/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f3dcf58b3a7e09b0775661b13a61459c/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/f3dcf58b3a7e09b0775661b13a61459c/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/8ef4fc66a1e8058e14f7cbd6bf253b2c/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/mashoodhussain/.gradle/caches/transforms-3/8ef4fc66a1e8058e14f7cbd6bf253b2c/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml
+activity#com.example.innoscripta_home_challenge.MainActivity
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:7:9-28:20
+	android:launchMode
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:10:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:14:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:15:13-55
+	android:exported
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:9:13-36
+	android:configChanges
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:13:13-163
+	android:theme
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:12:13-47
+	android:taskAffinity
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:11:13-36
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:8:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:20:13-23:17
+	android:resource
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:22:15-52
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:21:15-70
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:24:13-27:29
+action#android.intent.action.MAIN
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:25:17-68
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:26:17-76
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:26:27-74
+meta-data#flutterEmbedding
+ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:31:9-33:33
+	android:value
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:33:13-30
+	android:name
+		ADDED from /Users/mashoodhussain/Flutter_Project/innoscripta_home_challenge/innoscripta-home-challenge/android/app/src/main/AndroidManifest.xml:32:13-44
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/mashoodhussain/.gradle/caches/transforms-3/9b9e3fff141488600c219770b9078d5e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51

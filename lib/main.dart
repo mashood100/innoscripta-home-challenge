@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_router.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
@@ -23,38 +24,31 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
-  Locale? _locale;
-
-  void setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
-
   @override
   Widget build(
     BuildContext context,
   ) {
     final isDarkMode = ref.watch(themeProvider);
+    final locale = ref.watch(localeProvider);
 
     return MaterialApp.router(
       routerConfig: goRouter,
-      locale: _locale,
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('de', 'DE'),
-      ],
-      localizationsDelegates: const [
-        // AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      locale: locale,
       title: 'innoscripta Task challenge',
       theme: themeLight,
       darkTheme: themeDark,
       scaffoldMessengerKey: SnackbarHelper.scaffoldMessengerKey,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('de'), // German
+      ],
     );
   }
 }

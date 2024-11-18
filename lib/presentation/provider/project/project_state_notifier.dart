@@ -103,4 +103,5 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
       log('Update project error: $e');
     }
   }
+
 }

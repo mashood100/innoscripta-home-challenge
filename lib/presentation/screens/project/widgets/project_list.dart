@@ -5,6 +5,7 @@ import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectList extends ConsumerWidget {
   final List<Project> projects;
@@ -30,7 +31,7 @@ class ProjectList extends ConsumerWidget {
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.blue,
                 icon: Icons.edit,
-                label: 'Edit',
+                label: AppLocalizations.of(context)!.edit,
               ),
             ],
           ),
@@ -44,7 +45,7 @@ class ProjectList extends ConsumerWidget {
                 backgroundColor: Colors.transparent,
                 foregroundColor: Colors.red,
                 icon: Icons.delete,
-                label: 'Delete',
+                label: AppLocalizations.of(context)!.delete,
               ),
             ],
           ),
@@ -68,12 +69,12 @@ class ProjectList extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Project'),
-        content: const Text('Are you sure you want to delete this project?'),
+        title:  Text(AppLocalizations.of(context)!.deleteProject),
+        content:  Text(AppLocalizations.of(context)!.deleteProjectConfirmation),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child:  Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -82,7 +83,7 @@ class ProjectList extends ConsumerWidget {
               ref.read(projectStateProvider.notifier).deleteProject(project.id);
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Delete'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),

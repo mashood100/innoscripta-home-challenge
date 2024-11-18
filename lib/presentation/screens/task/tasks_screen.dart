@@ -13,6 +13,7 @@ import 'package:innoscripta_home_challenge/presentation/theme/app.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/shimmer/task_section_shimmer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TasksScreen extends ConsumerStatefulWidget {
   const TasksScreen({super.key, required this.project});
@@ -97,13 +98,11 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildTaskSection('To Do', todoTasks, 'todo', isLoading),
+                  _buildTaskSection(AppLocalizations.of(context)!.noTodoTasks, todoTasks, 'todo', isLoading),
                   Space.y2,
-                  _buildTaskSection(
-                      'In Progress', inProgressTasks, 'in_progress', isLoading),
+                  _buildTaskSection(AppLocalizations.of(context)!.noInProgressTasks, inProgressTasks, 'in_progress', isLoading),
                   Space.y2,
-                  _buildTaskSection(
-                      'Completed', completedTasks, 'completed', isLoading),
+                  _buildTaskSection(AppLocalizations.of(context)!.noCompletedTasks, completedTasks, 'completed', isLoading),
                   Space.yf(150),
                 ],
               ),

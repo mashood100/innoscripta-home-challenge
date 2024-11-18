@@ -9,7 +9,7 @@ class Project extends ProjectDto with EquatableMixin {
     super.color,
     super.isShared,
     super.order,
-    super.isFavorite,
+    super.isFavorite = false,
     super.isInboxProject,
     super.isTeamInbox,
     super.viewStyle,

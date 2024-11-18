@@ -7,4 +7,5 @@ enum AppRoute {
   projectDetails,
   createTask,
   comments,
+  favorites,
 }

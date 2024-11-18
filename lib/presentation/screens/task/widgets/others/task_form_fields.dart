@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/task_input_field.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TaskFormFields extends StatelessWidget {
   final TextEditingController titleController;
@@ -32,16 +33,16 @@ class TaskFormFields extends StatelessWidget {
       children: [
         TaskInputField(
           controller: titleController,
-          labelText: 'Task Title',
-          hintText: 'Enter task title',
+          labelText: AppLocalizations.of(context)!.taskTitle,
+          hintText: AppLocalizations.of(context)!.enterTaskTitle,
           validator: (value) =>
               value?.isEmpty ?? true ? 'Title is required' : null,
         ),
         Space.y2,
         TaskInputField(
           controller: descriptionController,
-          labelText: 'Description',
-          hintText: 'Enter task description',
+          labelText: AppLocalizations.of(context)!.description,
+          hintText: AppLocalizations.of(context)!.enterTaskDescription,
           maxLines: 3,
         ),
         Space.y2,
@@ -58,26 +59,26 @@ class TaskFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Priority', style: AppText.titleSmall),
+        Text(AppLocalizations.of(context)!.priority, style: AppText.titleSmall),
         Space.y1,
         SegmentedButton<int>(
           showSelectedIcon: false,
           segments: [
             ButtonSegment(
               value: 1,
-              label: Text('Normal', style: TextStyle(fontSize: 12.sp)),
+              label: Text(AppLocalizations.of(context)!.normal, style: TextStyle(fontSize: 12.sp)),
             ),
             ButtonSegment(
               value: 2,
-              label: Text('Medium', style: TextStyle(fontSize: 12.sp)),
+              label: Text(AppLocalizations.of(context)!.medium, style: TextStyle(fontSize: 12.sp)),
             ),
             ButtonSegment(
               value: 3,
-              label: Text('High', style: TextStyle(fontSize: 12.sp)),
+              label: Text(AppLocalizations.of(context)!.high, style: TextStyle(fontSize: 12.sp)),
             ),
             ButtonSegment(
               value: 4,
-              label: Text('Urgent', style: TextStyle(fontSize: 12.sp)),
+              label: Text(AppLocalizations.of(context)!.urgent, style: TextStyle(fontSize: 12.sp)),
             ),
           ],
           selected: {priority},
@@ -114,14 +115,14 @@ class TaskFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Due Date', style: AppText.titleSmall),
+        Text(AppLocalizations.of(context)!.dueDate, style: AppText.titleSmall),
         Space.y1,
         ListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(
             dueDate != null
                 ? '${dueDate!.day}/${dueDate!.month}/${dueDate!.year}'
-                : 'Select due date',
+                : AppLocalizations.of(context)!.selectDueDate,
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
@@ -160,7 +161,7 @@ class TaskFormFields extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Status:', style: AppText.titleSmall),
+        Text(AppLocalizations.of(context)!.status, style: AppText.titleSmall),
         Space.y1,
         Wrap(
           spacing: 8.r,

@@ -7,7 +7,7 @@ class ProjectDto {
   String? color;
   bool? isShared;
   int? order;
-  bool? isFavorite;
+  bool isFavorite;
   bool? isInboxProject;
   bool? isTeamInbox;
   String? viewStyle;
@@ -21,7 +21,7 @@ class ProjectDto {
     this.color,
     this.isShared,
     this.order,
-    this.isFavorite,
+    this.isFavorite = false,
     this.isInboxProject,
     this.isTeamInbox,
     this.viewStyle,
@@ -84,7 +84,7 @@ class ProjectDto {
       color: map['color'],
       isShared: map['is_shared'],
       order: map['order'],
-      isFavorite: map['is_favorite'],
+      isFavorite: map['is_favorite'] ?? false,
       isInboxProject: map['is_inbox_project'],
       isTeamInbox: map['is_team_inbox'],
       viewStyle: map['view_style'],

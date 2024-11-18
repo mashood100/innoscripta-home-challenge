@@ -6,6 +6,7 @@ import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/oth
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateTaskScreen extends ConsumerStatefulWidget {
   final Task? task;
@@ -46,7 +47,9 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.task == null ? 'Create New Task' : 'Edit Task'),
+        title: Text(widget.task == null 
+            ? AppLocalizations.of(context)!.createNewTask 
+            : AppLocalizations.of(context)!.editTask),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -76,7 +79,9 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
                 ElevatedButton(
                   onPressed: _saveTask,
                   child:
-                      Text(widget.task == null ? 'Create Task' : 'Update Task'),
+                      Text(widget.task == null 
+                          ? AppLocalizations.of(context)!.createTask 
+                          : AppLocalizations.of(context)!.updateTask),
                 ),
               ],
             ),

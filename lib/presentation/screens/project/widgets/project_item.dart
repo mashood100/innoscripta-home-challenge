@@ -5,8 +5,11 @@ import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProjectItem extends StatelessWidget {
+class ProjectItem extends ConsumerWidget {
   final Project project;
 
   const ProjectItem({
@@ -15,7 +18,7 @@ class ProjectItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: Space.h.add(Space.v),
       child: InkWell(
@@ -45,12 +48,12 @@ class ProjectItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        project.name ?? 'Untitled Project',
+                      project.name ?? AppLocalizations.of(context)!.untitledProject,
                         style: AppText.headlineMediumSemiBold.cl(Colors.white),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Tap to view task in this project',
+                       AppLocalizations.of(context)!.tapToViewTasks,
                         style: AppText.bodySmall.cl(Colors.white),
                       ),
                     ],
@@ -59,17 +62,14 @@ class ProjectItem extends StatelessWidget {
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        // Add favorite toggle functionality here
-                      },
                       icon: Icon(
-                        project.isFavorite == true
-                            ? Icons.star
-                            : Icons.star_border,
-                        color: project.isFavorite == true
-                            ? Colors.amber
-                            : Colors.white,
+                        project.isFavorite ? Icons.star : Icons.star_border,
+                        color: project.isFavorite ? Colors.amber : null,
                       ),
+                      onPressed: () {
+                        ref.read(projectStateProvider.notifier).updateProject(
+                            project.copyWith(isFavorite: !project.isFavorite));
+                      },
                     ),
                     Icon(
                       size: 40.r,

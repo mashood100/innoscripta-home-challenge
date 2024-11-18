@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/presentation/provider/project/project_state.dart';
 import 'package:innoscripta_home_challenge/presentation/provider/project/project_state_notifier.dart';
@@ -36,3 +37,4 @@ final commentStateProvider =
     StateNotifierProvider<CommentStateNotifier, CommentState>((ref) {
   return CommentStateNotifier(ref: ref);
 });
+final localeProvider = StateProvider<Locale>((ref) => const Locale('en', 'US'));

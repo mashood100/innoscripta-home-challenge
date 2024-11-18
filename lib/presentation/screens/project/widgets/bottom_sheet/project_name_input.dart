@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectNameInput extends StatelessWidget {
   final TextEditingController controller;
@@ -15,8 +16,8 @@ class ProjectNameInput extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        labelText: 'Project Title',
-        hintText: 'Enter project name',
+        labelText: AppLocalizations.of(context)!.projectTitle,
+        hintText: AppLocalizations.of(context)!.enterProjectName,
         filled: true,
         fillColor: Theme.of(context).cardColor,
         border: OutlineInputBorder(
@@ -29,13 +30,15 @@ class ProjectNameInput extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+          borderSide:
+              BorderSide(color: Theme.of(context).primaryColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
       validator: validator,
     );

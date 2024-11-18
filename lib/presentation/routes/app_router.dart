@@ -4,6 +4,7 @@ import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/language/language_screen.dart';
+import 'package:innoscripta_home_challenge/presentation/screens/project/favorite_projects_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/project_screen.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/bottom_sheet/add_project_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/tasks_screen.dart';
@@ -66,6 +67,11 @@ final goRouter = GoRouter(
             projectId: state.pathParameters['projectId']!,
             taskId: state.pathParameters['taskId']!,
           ),
+        ),
+        GoRoute(
+          path: 'favorites',
+          name: AppRoute.favorites.name,
+          builder: (context, state) => const FavoriteProjectsScreen(),
         ),
       ],
     ),
