@@ -20,6 +20,7 @@ void main() {
     );
   });
 
+  // ignore: unused_local_variable
   late TaskStateNotifier taskStateNotifier;
   late MockTasksUseCases mockTasksUseCases;
   late MockTaskStorageUseCases mockTaskStorageUseCases;
