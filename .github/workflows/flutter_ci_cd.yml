@@ -42,7 +42,6 @@ jobs:
         if: success() && github.ref == 'refs/heads/main'
         run: |
           flutter build apk --release
-          flutter build app-bundle --release
 
       - name: Upload APK
         if: success() && github.ref == 'refs/heads/main'
@@ -51,4 +50,3 @@ jobs:
           name: release-apk
           path: |
             build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
