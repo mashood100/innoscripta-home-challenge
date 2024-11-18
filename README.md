@@ -72,7 +72,7 @@ You can download the latest build directly from the GitHub Actions workflow arti
 [View latest builds](https://github.com/mashood100/innoscripta-home-challenge/actions/)
 <img width="1437" alt="Screenshot 2024-11-19 at 2 17 29 AM" src="https://github.com/user-attachments/assets/b7dbdb31-0d45-473a-94e7-5c443f3a6532">
 
-## Code Architecture  
+## Clean Code Architecture  
 <img width="1100" alt="arch_1" src="https://github.com/user-attachments/assets/a480a8c8-a2ba-4314-80c3-1ba3f8903543">
 
 The project follows a clean architecture pattern, ensuring clear separation of concerns and maintainable code. Below is an overview of the structure:  
