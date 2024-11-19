@@ -24,3 +24,21 @@ class AppDateUtils {
     }
   }
 }
+
+class StringUtils {
+  static String cleanText(dynamic text) {
+    if (text == null) return '';
+    String cleanedText = text.toString();
+    for (var i = 0; i < cleanedText.length; i++) {
+      if (cleanedText[i] == "‘" ||
+          cleanedText[i] == "’" ||
+          cleanedText[i] == "'") {
+        // Check for both types of quotes
+        cleanedText =
+            cleanedText.substring(0, i) + cleanedText.substring(i + 1);
+        i--; // Adjust index since we removed a character
+      }
+    }
+    return cleanedText;
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
@@ -92,7 +93,7 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
     if (_commentController.text.trim().isEmpty) return;
 
     final comment = Comment(
-      content: _commentController.text,
+      content:StringUtils.cleanText(_commentController.text) ,
       projectId: widget.projectId,
       taskId: widget.taskId,
     );

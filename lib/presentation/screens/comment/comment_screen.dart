@@ -12,16 +12,29 @@ class CommentScreen extends ConsumerStatefulWidget {
   final String taskId;
 
   const CommentScreen({
-    Key? key,
+    super.key,
     required this.projectId,
     required this.taskId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<CommentScreen> createState() => _CommentScreenState();
 }
 
 class _CommentScreenState extends ConsumerState<CommentScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _loadComments();
+  }
+
+  Future<void> _loadComments() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final commentStateNotifier = ref.read(commentStateProvider.notifier);
+      await commentStateNotifier.getAllTaskComments(widget.taskId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final commentState = ref.watch(commentStateProvider);

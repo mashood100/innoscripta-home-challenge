@@ -11,7 +11,6 @@ import 'package:innoscripta_home_challenge/domain/use_cases/task/task_storage_us
 
 class TaskStateNotifier extends StateNotifier<TaskState> {
   TaskStateNotifier({
-
     required TaskStorageUseCases taskStorageUseCases,
   })  : _taskUseCase = TasksUseCases(
           repository: TasksRepositoryImpl(api: TasksApiService()),

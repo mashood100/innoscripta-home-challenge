@@ -8,12 +8,11 @@ import 'package:innoscripta_home_challenge/presentation/provider/comment/comment
 import 'package:innoscripta_home_challenge/presentation/shared/widgets/snackbars/snackbar_helper.dart';
 
 class CommentStateNotifier extends StateNotifier<CommentState> {
-  CommentStateNotifier()  : 
-        _commentUseCase = CommentsUseCases(
+  CommentStateNotifier()
+      : _commentUseCase = CommentsUseCases(
           repository: CommentsRepositoryImpl(api: CommentsApiService()),
         ),
         super(CommentState.initial());
-
 
   final CommentsUseCases _commentUseCase;
 
@@ -40,6 +39,7 @@ class CommentStateNotifier extends StateNotifier<CommentState> {
 
   Future<void> getAllTaskComments(String taskId) async {
     try {
+      state = state.copyWith(comments: []);
       state = state.copyWith(status: CommentProviderState.loading);
       final comments = await _commentUseCase.getAllForTask(taskId);
       state = state.copyWith(
@@ -94,10 +94,9 @@ class CommentStateNotifier extends StateNotifier<CommentState> {
     try {
       await _commentUseCase.delete(commentId);
 
-      final updatedComments = state.comments
-          .where((comment) => comment.id != commentId)
-          .toList();
-      
+      final updatedComments =
+          state.comments.where((comment) => comment.id != commentId).toList();
+
       state = state.copyWith(
         status: CommentProviderState.success,
         comments: updatedComments,

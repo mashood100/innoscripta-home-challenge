@@ -47,8 +47,8 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.task == null 
-            ? AppLocalizations.of(context)!.createNewTask 
+        title: Text(widget.task == null
+            ? AppLocalizations.of(context)!.createNewTask
             : AppLocalizations.of(context)!.editTask),
         leading: IconButton(
           icon: const Icon(Icons.close),
@@ -78,10 +78,9 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
                 Space.y2,
                 ElevatedButton(
                   onPressed: _saveTask,
-                  child:
-                      Text(widget.task == null 
-                          ? AppLocalizations.of(context)!.createTask 
-                          : AppLocalizations.of(context)!.updateTask),
+                  child: Text(widget.task == null
+                      ? AppLocalizations.of(context)!.createTask
+                      : AppLocalizations.of(context)!.updateTask),
                 ),
               ],
             ),
@@ -103,8 +102,8 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
       final taskNotifier = ref.read(taskStateProvider.notifier);
       final task = Task(
         id: widget.task?.id,
-        content: _titleController.text,
-        description: _descriptionController.text,
+        content: StringUtils.cleanText(_titleController.text),
+        description: StringUtils.cleanText(_descriptionController.text),
         due: _dueDate != null
             ? Due(datetime: AppDateUtils.formatDate(_dueDate!))
             : null,

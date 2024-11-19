@@ -97,7 +97,6 @@ class TaskCard extends ConsumerWidget {
           ],
           if (task.due != null) ...[
             Space.y1,
-            _buildDueDate(context),
           ],
           Space.y,
           Row(

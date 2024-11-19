@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
@@ -80,7 +81,7 @@ class _UpdateCommentSheetState extends ConsumerState<UpdateCommentSheet> {
     if (_controller.text.trim().isEmpty) return;
 
     final updatedComment = widget.comment.copyWith(
-      content: _controller.text,
+      content: StringUtils.cleanText(_controller.text),
     );
 
     ref.read(commentStateProvider.notifier).updateComment(updatedComment);

@@ -7,7 +7,7 @@ class CommentsApiService extends ApiService {
   Future<String> getAllForTask(String taskId) async {
     try {
       final requestData = RequestData(
-        '/comments',
+        '/comments/',
         RequestType.GET,
         queryParameters: {'task_id': taskId},
       );

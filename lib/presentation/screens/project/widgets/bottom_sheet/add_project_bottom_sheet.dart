@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
@@ -85,7 +86,7 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
                       controller: _titleController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                       return AppLocalizations.of(context)!.pleaseEnterTitle;
+                          return AppLocalizations.of(context)!.pleaseEnterTitle;
                         }
                         return null;
                       },
@@ -119,14 +120,16 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
                           if (widget.project != null) {
                             projectStateNotifier.updateProject(
                               widget.project!.copyWith(
-                                name: _titleController.text,
+                                name: StringUtils.cleanText(
+                                    _titleController.text),
                                 color: _selectedColor,
                               ),
                             );
                           } else {
                             projectStateNotifier.createProject(
                               Project(
-                                name: _titleController.text,
+                                name: StringUtils.cleanText(
+                                    _titleController.text),
                                 color: _selectedColor,
                               ),
                             );
