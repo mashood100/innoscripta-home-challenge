@@ -1,7 +1,17 @@
 # Innoscripta Task Timer  
 
 A Flutter application for efficient task management with advanced time-tracking capabilities. This app empowers users to create, manage, and track tasks across multiple projects with features designed for productivity and collaboration.  
+## Dependencies
 
+| **Category**             | **Package**                                      |
+|---------------------------|--------------------------------------------------|
+| **State Management**      | [bloc](https://pub.dev/packages/bloc)            |
+| **State Testing**         | [bloc_test](https://pub.dev/packages/bloc_test)  |
+| **Dependency Injection**  | [get_it](https://pub.dev/packages/get_it)        |
+| **Networking**            | [http](https://pub.dev/packages/http)            |
+| **Routing**               | [go_router](https://pub.dev/packages/go_router)  |
+| **Responsiveness**        | [screen_utils](https://pub.dev/packages/screen_utils) |
+| **Local Storage**         | [shared_preferences](https://pub.dev/packages/shared_preferences) |
 ## Features  
 
 - ⏱️ **Task Time Tracking**: Start, pause, and reset functionality for each task.  
@@ -16,6 +26,7 @@ A Flutter application for efficient task management with advanced time-tracking 
 - 🌐 **Multi-Language Support**: A localized experience for diverse users.  
 - 📊 **Firebase Analytics**: Track production issues and monitor app performance.  
 - 🌗 **Dark and Light Themes**: Adapt to your preferred visual style.  
+
 
 ## Architecture  
 
@@ -92,7 +103,7 @@ The project follows a clean architecture pattern, ensuring clear separation of c
 
 ### Presentation Layer  
 
-- **Provider**: Manages application state using Riverpod providers to handle state and business logic for the UI.  
+- **Provider**: Manages application state using **Bloc providers** to handle state and business logic for the UI.  
 - **Routes**: Defines the navigation structure and handles app routing.  
 - **Screens**: Contains the visual components and widgets for the app's user interface.  
 - **Shared**: Houses reusable widgets and components shared across different screens.  
