@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 
-class ProjectColorSelector extends ConsumerWidget {
+class ProjectColorSelector extends StatelessWidget {
   final String selectedColor;
   final Function(String) onColorSelected;
   final List<String> colors;
@@ -16,7 +15,7 @@ class ProjectColorSelector extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_event.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/task_details_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TaskCard extends ConsumerWidget {
+class TaskCard extends StatelessWidget {
   final Task task;
 
   const TaskCard({
@@ -18,7 +19,7 @@ class TaskCard extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return LongPressDraggable<Task>(
       data: task,
       feedback: Material(
@@ -33,15 +34,16 @@ class TaskCard extends ConsumerWidget {
         child: _buildCardContent(context),
       ),
       child: GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              builder: (context) => TaskDetailsBottomSheet(task: task),
-            );
-          },
-          child: _buildCardContent(context)),
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => TaskDetailsBottomSheet(task: task),
+          );
+        },
+        child: _buildCardContent(context),
+      ),
     );
   }
 
@@ -115,13 +117,9 @@ class TaskCard extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Consumer(
-                  builder: (context, ref, _) {
-                    return TimerButton(
-                      task: task,
-                    );
-                  },
-                ),
+                TimerButton(
+                  task: task,
+                )
               ],
             ),
           ],
@@ -130,38 +128,34 @@ class TaskCard extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Consumer(
-                  builder: (context, ref, _) {
-                    return Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20.r),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.r, vertical: 8.r),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () {
+                      context.read<TaskBloc>().add(CloseTaskEvent(task));
+                    },
+                    icon: Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.green,
+                      size: 20.r,
+                    ),
+                    label: Text(
+                      "Mark as completed",
+                      style: AppText.labelMedium.copyWith(
+                        color: Colors.green,
                       ),
-                      child: TextButton.icon(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: Size.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        onPressed: () {
-                          ref.read(taskStateProvider.notifier).closeTask(task);
-                        },
-                        icon: Icon(
-                          Icons.check_circle_outline,
-                          color: Colors.green,
-                          size: 20.r,
-                        ),
-                        label: Text(
-                          "Mark as completed",
-                          style: AppText.labelMedium.copyWith(
-                            color: Colors.green,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
               ],
             ),

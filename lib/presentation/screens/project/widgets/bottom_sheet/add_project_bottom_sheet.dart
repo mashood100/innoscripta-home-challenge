@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/project/project_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/project/project_event.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'project_color_selector.dart';
 import 'project_name_input.dart';
@@ -12,7 +13,7 @@ import 'sheet_header.dart';
 import 'submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AddProjectBottomSheet extends ConsumerStatefulWidget {
+class AddProjectBottomSheet extends StatefulWidget {
   final Project? project;
 
   const AddProjectBottomSheet({
@@ -21,11 +22,10 @@ class AddProjectBottomSheet extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<AddProjectBottomSheet> createState() =>
-      _AddProjectBottomSheetState();
+  State<AddProjectBottomSheet> createState() => _AddProjectBottomSheetState();
 }
 
-class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
+class _AddProjectBottomSheetState extends State<AddProjectBottomSheet> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _titleController;
   String _selectedColor = 'red';
@@ -52,8 +52,6 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final projectStateNotifier = ref.read(projectStateProvider.notifier);
-
     return Material(
       child: SingleChildScrollView(
         controller: ModalScrollController.of(context),
@@ -118,21 +116,25 @@ class _AddProjectBottomSheetState extends ConsumerState<AddProjectBottomSheet> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           if (widget.project != null) {
-                            projectStateNotifier.updateProject(
-                              widget.project!.copyWith(
-                                name: StringUtils.cleanText(
-                                    _titleController.text),
-                                color: _selectedColor,
-                              ),
-                            );
+                            context.read<ProjectBloc>().add(
+                                  UpdateProjectEvent(
+                                    widget.project!.copyWith(
+                                      name: StringUtils.cleanText(
+                                          _titleController.text),
+                                      color: _selectedColor,
+                                    ),
+                                  ),
+                                );
                           } else {
-                            projectStateNotifier.createProject(
-                              Project(
-                                name: StringUtils.cleanText(
-                                    _titleController.text),
-                                color: _selectedColor,
-                              ),
-                            );
+                            context.read<ProjectBloc>().add(
+                                  CreateProjectEvent(
+                                    Project(
+                                      name: StringUtils.cleanText(
+                                          _titleController.text),
+                                      color: _selectedColor,
+                                    ),
+                                  ),
+                                );
                           }
                           Navigator.pop(context);
                         }

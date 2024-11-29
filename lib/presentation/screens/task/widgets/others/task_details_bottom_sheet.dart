@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/timer_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_event.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/timer/timer_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/timer/timer_state.dart';
 
-class TaskDetailsBottomSheet extends ConsumerWidget {
+class TaskDetailsBottomSheet extends StatelessWidget {
   final Task task;
 
   const TaskDetailsBottomSheet({
@@ -18,7 +21,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       padding: Space.all(15),
       decoration: BoxDecoration(
@@ -52,7 +55,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
             Space.y2,
             _buildContent(context),
             Space.y2,
-            _buildActions(context, ref),
+            _buildActions(context),
             Space.y2,
           ],
         ),
@@ -106,7 +109,8 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppLocalizations.of(context)!.description, style: AppText.titleMediumSemiBold),
+              Text(AppLocalizations.of(context)!.description,
+                  style: AppText.titleMediumSemiBold),
               Space.y1,
               Container(
                 width: double.infinity,
@@ -129,13 +133,15 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
         ),
 
         // Priority Section
-        Text('${AppLocalizations.of(context)!.priority}:', style: AppText.titleMediumSemiBold),
+        Text('${AppLocalizations.of(context)!.priority}:',
+            style: AppText.titleMediumSemiBold),
         Space.y1,
         _buildPriorityChip(context),
         Space.y2,
 
         // Task Details Section
-        Text(AppLocalizations.of(context)!.taskDetails, style: AppText.titleMediumSemiBold),
+        Text(AppLocalizations.of(context)!.taskDetails,
+            style: AppText.titleMediumSemiBold),
         Space.y1,
         Container(
           padding: const EdgeInsets.all(12),
@@ -145,22 +151,17 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
           ),
           child: Column(
             children: [
-              _buildDetailRow(AppLocalizations.of(context)!.taskId, task.id ?? 'N/A'),
+              _buildDetailRow(
+                  AppLocalizations.of(context)!.taskId, task.id ?? 'N/A'),
               const Divider(height: 16),
-              _buildDetailRow(AppLocalizations.of(context)!.created, AppDateUtils.formatDate(task.createdAt)),
+              _buildDetailRow(AppLocalizations.of(context)!.created,
+                  AppDateUtils.formatDate(task.createdAt)),
               if (task.due != null) ...[
                 const Divider(height: 16),
                 _buildDetailRow('Due Date', task.due.toString()),
               ],
               const Divider(height: 16),
-              Consumer(
-                builder: (context, ref, child) {
-                  final timerState = ref.watch(timerProvider);
-                  final taskTimer = timerState.taskTimers[task.id];
-                  final currentDuration = taskTimer?.currentDuration ?? 0;
-                  return _buildDetailRow(AppLocalizations.of(context)!.timeSpent, _formatDuration(currentDuration));
-                },
-              ),
+              _buildTimerDuration(context),
             ],
           ),
         ),
@@ -169,7 +170,8 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
         // Timer Section (existing code)
         if (task.labels!.contains('in_progress')) ...[
           Space.y2,
-          Text(AppLocalizations.of(context)!.timer, style: AppText.titleMediumSemiBold),
+          Text(AppLocalizations.of(context)!.timer,
+              style: AppText.titleMediumSemiBold),
           Space.y1,
           Center(child: TimerButton(task: task)),
         ],
@@ -238,7 +240,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
     );
   }
 
-  Widget _buildActions(BuildContext context, WidgetRef ref) {
+  Widget _buildActions(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
@@ -277,7 +279,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
               Space.x2,
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () => _showDeleteConfirmation(context, ref),
+                  onPressed: () => _showDeleteConfirmation(context),
                   icon: const Icon(Icons.delete),
                   label: const Text('Delete'),
                   style: ElevatedButton.styleFrom(
@@ -323,7 +325,7 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
     );
   }
 
-  Future<void> _showDeleteConfirmation(BuildContext context, WidgetRef ref) {
+  Future<void> _showDeleteConfirmation(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -335,12 +337,10 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
             child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
-            onPressed: () async {
-              await ref.read(taskStateProvider.notifier).deleteTask(task);
-              if (context.mounted) {
-                Navigator.pop(context); // Close dialog
-                Navigator.pop(context); // Close bottom sheet
-              }
+            onPressed: () {
+              context.read<TaskBloc>().add(DeleteTaskEvent(task));
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Close bottom sheet
             },
             child: Text(
               AppLocalizations.of(context)!.delete,
@@ -356,5 +356,18 @@ class TaskDetailsBottomSheet extends ConsumerWidget {
     final hours = (seconds / 3600).floor();
     final minutes = ((seconds % 3600) / 60).floor();
     return '${hours}h ${minutes}m';
+  }
+
+  Widget _buildTimerDuration(BuildContext context) {
+    return BlocBuilder<TimerBloc, TimerState>(
+      builder: (context, state) {
+        final taskTimer = state.taskTimers[task.id];
+        final currentDuration = taskTimer?.currentDuration ?? 0;
+        return _buildDetailRow(
+          AppLocalizations.of(context)!.timeSpent,
+          _formatDuration(currentDuration),
+        );
+      },
+    );
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/project/widgets/project_item.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProjectPreview extends ConsumerWidget {
+class ProjectPreview extends StatelessWidget {
   final Project project;
 
   const ProjectPreview({
@@ -14,7 +13,9 @@ class ProjectPreview extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

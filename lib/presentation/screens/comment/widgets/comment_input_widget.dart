@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_event.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CommentInputWidget extends ConsumerStatefulWidget {
+class CommentInputWidget extends StatefulWidget {
   final String projectId;
   final String taskId;
 
@@ -17,10 +18,10 @@ class CommentInputWidget extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<CommentInputWidget> createState() => _CommentInputWidgetState();
+  State<CommentInputWidget> createState() => _CommentInputWidgetState();
 }
 
-class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
+class _CommentInputWidgetState extends State<CommentInputWidget> {
   final TextEditingController _commentController = TextEditingController();
 
   @override
@@ -93,12 +94,12 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
     if (_commentController.text.trim().isEmpty) return;
 
     final comment = Comment(
-      content:StringUtils.cleanText(_commentController.text) ,
+      content: StringUtils.cleanText(_commentController.text),
       projectId: widget.projectId,
       taskId: widget.taskId,
     );
 
-    ref.read(commentStateProvider.notifier).createComment(comment);
+    context.read<CommentBloc>().add(CreateCommentEvent(comment));
     _commentController.clear();
   }
 }
