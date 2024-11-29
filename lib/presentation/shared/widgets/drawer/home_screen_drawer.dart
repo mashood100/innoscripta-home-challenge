@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 
-class HomeScreenDrawer extends ConsumerWidget {
+class HomeScreenDrawer extends StatelessWidget {
   const HomeScreenDrawer({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context, ) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,

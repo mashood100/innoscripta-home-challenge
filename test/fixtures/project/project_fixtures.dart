@@ -26,4 +26,22 @@ class ProjectFixtures {
       isFavorite: false,
     );
   }
+
+  static Project mockUpdatedProject() {
+    return Project(
+      id: '1',
+      name: 'Updated Test Project',
+      color: 'blue',
+      isFavorite: true,
+    );
+  }
+
+  static Project mockFallbackProject() {
+    return Project(
+      id: 'fallback-id',
+      name: 'fallback-name',
+      color: 'fallback-color',
+      isFavorite: false,
+    );
+  }
 }

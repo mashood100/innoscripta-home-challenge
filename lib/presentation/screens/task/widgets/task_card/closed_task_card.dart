@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/timer/timer_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/timer/timer_state.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ClosedTaskCard extends ConsumerStatefulWidget {
+class ClosedTaskCard extends StatefulWidget {
   final Task task;
 
   const ClosedTaskCard({
@@ -17,10 +18,10 @@ class ClosedTaskCard extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<ClosedTaskCard> createState() => _ClosedTaskCardState();
+  State<ClosedTaskCard> createState() => _ClosedTaskCardState();
 }
 
-class _ClosedTaskCardState extends ConsumerState<ClosedTaskCard> {
+class _ClosedTaskCardState extends State<ClosedTaskCard> {
   bool isExpanded = false;
 
   String _formatDuration(int seconds) {
@@ -32,76 +33,79 @@ class _ClosedTaskCardState extends ConsumerState<ClosedTaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    final timerState = ref.watch(timerProvider);
-    final taskTimer = timerState.taskTimers[widget.task.id];
-    final timeSpent = taskTimer?.currentDuration ?? 0;
+    return BlocBuilder<TimerBloc, TimerState>(
+      builder: (context, timerState) {
+        final taskTimer = timerState.taskTimers[widget.task.id];
+        final timeSpent = taskTimer?.currentDuration ?? 0;
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            isExpanded = !isExpanded;
-          });
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: Space.all(),
-              child: Row(
-                children: [
-                  Image.asset('assets/done.png', width: 40.r, height: 40.r),
-                  Space.x,
-                  Expanded(
-                    child: Text(
-                      widget.task.content ??
-                          AppLocalizations.of(context)!.untitledTask,
-                      style: AppText.titleMediumBold,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+        return Card(
+          margin: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r),
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: Space.all(),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/done.png', width: 40.r, height: 40.r),
+                      Space.x,
+                      Expanded(
+                        child: Text(
+                          widget.task.content ??
+                              AppLocalizations.of(context)!.untitledTask,
+                          style: AppText.titleMediumBold,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Icon(
+                        isExpanded ? Icons.expand_less : Icons.expand_more,
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ],
+                  ),
+                ),
+                if (isExpanded) ...[
+                  const Divider(),
+                  Padding(
+                    padding: Space.all(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (widget.task.description?.isNotEmpty ?? false) ...[
+                          Text(
+                            AppLocalizations.of(context)!.description,
+                            style: AppText.titleSmallSemiBold,
+                          ),
+                          Space.y,
+                          Text(
+                            widget.task.description ?? '',
+                            style: AppText.bodyMedium,
+                          ),
+                          Space.y2,
+                        ],
+                        _buildDetailsSection(context, timeSpent),
+                        Space.y2,
+                        _buildPrioritySection(context),
+                        if (widget.task.duration != null) ...[
+                          Space.y2,
+                          _buildDurationSection(context),
+                        ],
+                      ],
                     ),
                   ),
-                  Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more,
-                    color: Theme.of(context).hintColor,
-                  ),
                 ],
-              ),
+              ],
             ),
-            if (isExpanded) ...[
-              const Divider(),
-              Padding(
-                padding: Space.all(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (widget.task.description?.isNotEmpty ?? false) ...[
-                      Text(
-                        AppLocalizations.of(context)!.description,
-                        style: AppText.titleSmallSemiBold,
-                      ),
-                      Space.y,
-                      Text(
-                        widget.task.description ?? '',
-                        style: AppText.bodyMedium,
-                      ),
-                      Space.y2,
-                    ],
-                    _buildDetailsSection(context, timeSpent),
-                    Space.y2,
-                    _buildPrioritySection(context),
-                    if (widget.task.duration != null) ...[
-                      Space.y2,
-                      _buildDurationSection(context),
-                    ],
-                  ],
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

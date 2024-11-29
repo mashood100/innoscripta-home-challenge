@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_event.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UpdateCommentSheet extends ConsumerStatefulWidget {
+class UpdateCommentSheet extends StatefulWidget {
   final Comment comment;
 
   const UpdateCommentSheet({
@@ -15,10 +16,10 @@ class UpdateCommentSheet extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<UpdateCommentSheet> createState() => _UpdateCommentSheetState();
+  State<UpdateCommentSheet> createState() => _UpdateCommentSheetState();
 }
 
-class _UpdateCommentSheetState extends ConsumerState<UpdateCommentSheet> {
+class _UpdateCommentSheetState extends State<UpdateCommentSheet> {
   late TextEditingController _controller;
 
   @override
@@ -84,7 +85,7 @@ class _UpdateCommentSheetState extends ConsumerState<UpdateCommentSheet> {
       content: StringUtils.cleanText(_controller.text),
     );
 
-    ref.read(commentStateProvider.notifier).updateComment(updatedComment);
+    context.read<CommentBloc>().add(UpdateCommentEvent(updatedComment));
     Navigator.pop(context);
   }
 }

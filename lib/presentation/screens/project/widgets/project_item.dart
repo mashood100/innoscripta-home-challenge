@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:innoscripta_home_challenge/core/utils/colors_utils.dart';
 import 'package:innoscripta_home_challenge/domain/entity/project/project.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/project/project_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/project/project_event.dart';
 import 'package:innoscripta_home_challenge/presentation/routes/app_routes.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProjectItem extends ConsumerWidget {
+class ProjectItem extends StatelessWidget {
   final Project project;
+  final bool isPreview;
 
   const ProjectItem({
     super.key,
     required this.project,
     required this.isPreview,
   });
-  final bool isPreview;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: Space.h.add(Space.v),
       child: InkWell(
@@ -50,8 +52,7 @@ class ProjectItem extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        project.name ??
-                            AppLocalizations.of(context)!.untitledProject,
+                        project.name ?? AppLocalizations.of(context)!.untitledProject,
                         style: AppText.headlineMediumSemiBold.cl(Colors.white),
                       ),
                       const SizedBox(height: 8),
@@ -70,8 +71,11 @@ class ProjectItem extends ConsumerWidget {
                         color: project.isFavorite ? Colors.amber : null,
                       ),
                       onPressed: () {
-                        ref.read(projectStateProvider.notifier).updateProject(
-                            project.copyWith(isFavorite: !project.isFavorite));
+                        context.read<ProjectBloc>().add(
+                          UpdateProjectEvent(
+                            project.copyWith(isFavorite: !project.isFavorite),
+                          ),
+                        );
                       },
                     ),
                     Icon(

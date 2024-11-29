@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innoscripta_home_challenge/domain/entity/task/task.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/task/widgets/others/task_form_fields.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_event.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/task/task_state.dart';
 import 'package:innoscripta_home_challenge/data/dto/task/task_dto.dart';
 import 'package:innoscripta_home_challenge/core/utils/date_utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CreateTaskScreen extends ConsumerStatefulWidget {
+class CreateTaskScreen extends StatefulWidget {
   final Task? task;
   final String projectId;
 
   const CreateTaskScreen({
-    Key? key,
+    super.key,
     this.task,
     required this.projectId,
-  }) : super(key: key);
+  });
 
   @override
-  ConsumerState<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
 }
 
-class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
+class _CreateTaskScreenState extends State<CreateTaskScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
@@ -45,44 +47,51 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.task == null
-            ? AppLocalizations.of(context)!.createNewTask
-            : AppLocalizations.of(context)!.editTask),
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+    return BlocListener<TaskBloc, TaskState>(
+      listener: (context, state) {
+        if (state.status == TaskStatus.success) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.task == null
+              ? AppLocalizations.of(context)!.createNewTask
+              : AppLocalizations.of(context)!.editTask),
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: Space.all(),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TaskFormFields(
-                  titleController: _titleController,
-                  descriptionController: _descriptionController,
-                  dueDate: _dueDate,
-                  priority: _priority,
-                  selectedLabels: _selectedLabels,
-                  onDueDateChanged: (date) => setState(() => _dueDate = date),
-                  onPriorityChanged: (value) =>
-                      setState(() => _priority = value),
-                  onLabelsChanged: (labels) =>
-                      setState(() => _selectedLabels = labels),
-                ),
-                Space.y2,
-                ElevatedButton(
-                  onPressed: _saveTask,
-                  child: Text(widget.task == null
-                      ? AppLocalizations.of(context)!.createTask
-                      : AppLocalizations.of(context)!.updateTask),
-                ),
-              ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: Space.all(),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TaskFormFields(
+                    titleController: _titleController,
+                    descriptionController: _descriptionController,
+                    dueDate: _dueDate,
+                    priority: _priority,
+                    selectedLabels: _selectedLabels,
+                    onDueDateChanged: (date) => setState(() => _dueDate = date),
+                    onPriorityChanged: (value) =>
+                        setState(() => _priority = value),
+                    onLabelsChanged: (labels) =>
+                        setState(() => _selectedLabels = labels),
+                  ),
+                  Space.y2,
+                  ElevatedButton(
+                    onPressed: _saveTask,
+                    child: Text(widget.task == null
+                        ? AppLocalizations.of(context)!.createTask
+                        : AppLocalizations.of(context)!.updateTask),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -97,9 +106,8 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
     super.dispose();
   }
 
-  Future<void> _saveTask() async {
+  void _saveTask() {
     if (_formKey.currentState!.validate()) {
-      final taskNotifier = ref.read(taskStateProvider.notifier);
       final task = Task(
         id: widget.task?.id,
         content: StringUtils.cleanText(_titleController.text),
@@ -113,13 +121,12 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
       );
 
       if (widget.task == null) {
-        await taskNotifier
-            .createTask(task.copyWith(parentId: widget.projectId));
+        context.read<TaskBloc>().add(
+              CreateTaskEvent(task.copyWith(parentId: widget.projectId)),
+            );
       } else {
-        await taskNotifier.updateTask(task);
+        context.read<TaskBloc>().add(UpdateTaskEvent(task));
       }
-
-      if (mounted) Navigator.pop(context);
     }
   }
 }

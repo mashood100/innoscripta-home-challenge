@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:innoscripta_home_challenge/domain/entity/comment/comment.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_bloc.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_event.dart';
+import 'package:innoscripta_home_challenge/presentation/bloc/comment/comment_state.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/comment_card.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/comment_input_widget.dart';
 import 'package:innoscripta_home_challenge/presentation/screens/comment/widgets/update_comment_sheet.dart';
-import 'package:innoscripta_home_challenge/presentation/shared/providers/provider_instances.dart';
 import 'package:innoscripta_home_challenge/presentation/theme/configs.dart';
 
-class CommentScreen extends ConsumerStatefulWidget {
+class CommentScreen extends StatefulWidget {
   final String projectId;
   final String taskId;
 
@@ -18,59 +20,56 @@ class CommentScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<CommentScreen> createState() => _CommentScreenState();
+  State<CommentScreen> createState() => _CommentScreenState();
 }
 
-class _CommentScreenState extends ConsumerState<CommentScreen> {
+class _CommentScreenState extends State<CommentScreen> {
   @override
   void initState() {
     super.initState();
     _loadComments();
   }
 
-  Future<void> _loadComments() async {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final commentStateNotifier = ref.read(commentStateProvider.notifier);
-      await commentStateNotifier.getAllTaskComments(widget.taskId);
-    });
+  void _loadComments() {
+    context.read<CommentBloc>().add(GetAllTaskCommentsEvent(widget.taskId));
   }
 
   @override
   Widget build(BuildContext context) {
-    final commentState = ref.watch(commentStateProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Comments'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: Space.all(),
-              itemCount: commentState.comments.length,
-              itemBuilder: (context, index) {
-                return CommentCard(
-                  comment: commentState.comments[index],
-                  onDelete: () =>
-                      _handleDeleteComment(commentState.comments[index]),
-                  onUpdate: () =>
-                      _showUpdateCommentSheet(commentState.comments[index]),
-                );
-              },
-            ),
-          ),
-          CommentInputWidget(
-            projectId: widget.projectId,
-            taskId: widget.taskId,
-          ),
-        ],
+      body: BlocBuilder<CommentBloc, CommentState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  padding: Space.all(),
+                  itemCount: state.comments.length,
+                  itemBuilder: (context, index) {
+                    return CommentCard(
+                      comment: state.comments[index],
+                      onDelete: () => _handleDeleteComment(state.comments[index]),
+                      onUpdate: () => _showUpdateCommentSheet(state.comments[index]),
+                    );
+                  },
+                ),
+              ),
+              CommentInputWidget(
+                projectId: widget.projectId,
+                taskId: widget.taskId,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
   void _handleDeleteComment(Comment comment) {
-    ref.read(commentStateProvider.notifier).deleteComment(comment.id!);
+    context.read<CommentBloc>().add(DeleteCommentEvent(comment.id!));
   }
 
   void _showUpdateCommentSheet(Comment comment) {
